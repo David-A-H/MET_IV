@@ -10,3 +10,5 @@ Bomboclat comes from Jamaican English. The term has been recorded since the 1950
 David IV, also known as David IV the Builder[1] (Georgian: დავით IV აღმაშენებელი, romanized: davit IV aghmashenebeli) (c. 1073 – 24 January 1125), of the Bagrationi dynasty, was the 5th king (mepe) of the Kingdom of Georgia from 1089 until his death in 1125.
 
 Popularly considered to be the greatest and most successful Georgian ruler in history and an original architect of the Georgian Golden Age, he succeeded in driving the Seljuk Turks out of the country, winning the Battle of Didgori in 1121. His reforms of the army and administration enabled him to reunite the country and bring most of the lands of the Caucasus under Georgia's control. A friend of the Church and a notable promoter of Christian culture, he was canonized by the Georgian Orthodox Church.
+
+## @David, do you want to be my vanilla slave?
