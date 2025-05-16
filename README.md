@@ -1,4 +1,4 @@
 # MET_IV
 
-# Bomboclat
+# Bomboclat/Rasclat
 Methods IV Prediction Project
