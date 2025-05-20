@@ -1,0 +1,2888 @@
+
+-----------------------------------------------------------------------------------------------------------------------------------
+country                                                                                                                     Country
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  country
+
+                 range:  [1,21]                       units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,200         1  Algeria
+                         1,200         5  Egypt
+                         1,200         8  Jordan
+                         1,200        10  Lebanon
+                         1,200        13  Morocco
+                         1,200        15  Palestine
+                         1,200        21  Tunisia
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1                                                                                                                      Governorate
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q1
+
+                 range:  [1001,21024]                 units:  1
+         unique values:  142                      missing .:  0/8,400
+
+              examples:  5007  Gharbia
+                         8006  Aqaba
+                         13003 Oriental
+                         15011 Hebron
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2                                                                                                                         District
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q2
+
+                 range:  [1001,21136]                 units:  1
+         unique values:  629                      missing .:  0/8,400
+
+              examples:  5048  Abu Serinea
+                         8035  Qasabah Amman
+                         13025 Bni Faghloum
+                         15050 Jerusalem Old City
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q101                                                   Q101. How would you evaluate the current economic situation in your country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q101
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           241         1  Very good
+                         2,451         2  Good
+                         3,112         3  Bad
+                         2,596         4  Very bad
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q101a                                              Q101a. How would you evaluate the economic situation in your country five years 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q101a
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,866         1  Much better
+                         2,931         2  Somewhat better
+                         1,930         3  Almost the same as the current
+                                          situation
+                           960         4  Somewhat worse
+                           713         5  Much worse
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q102                                               Q102. What do you think will be the economic situation in your country during th
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q102
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           875         1  Much better
+                         3,000         2  Somewhat better
+                         1,705         3  Almost the same as the current
+                                          situation
+                         1,315         4  Somewhat worse
+                         1,505         5  Much worse
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q102b                                                      Q102b. How would you evaluate your current household economic situation?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q102b
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           402         1  Very good
+                         4,801         2  Good
+                         2,249         3  Bad
+                           948         4  Very bad
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103                                                     Q103. Generally speaking, do you think most people are trustworthy or not?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,518         1  Most people are trustworthy
+                         6,882         2  Most people are not trustworthy
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a1                                                           Q103a1. Anyone who completely trusts anyone is asking for trouble.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a1
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,493         1  Strongly agree
+                         2,632         2  Somewhat agree
+                           677         3  Neither agree nor disagree
+                         1,021         4  Somewhat disagree
+                           577         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a2                                             Q103a2. Never tell anyone the real reason you did something unless it is useful 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a2
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,367         1  Strongly agree
+                         2,912         2  Somewhat agree
+                           938         3  Neither agree nor disagree
+                         1,236         4  Somewhat disagree
+                           947         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a3                                             Q103a3. It is safest to assume that all people have a vicious streak and it will
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a3
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,509         1  Strongly agree
+                         2,264         2  Somewhat agree
+                         1,218         3  Neither agree nor disagree
+                         1,911         4  Somewhat disagree
+                         1,498         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a4                                                Q103a4. The best way to handle people is to tell them what they want to hear.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a4
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,601         1  Strongly agree
+                         2,513         2  Somewhat agree
+                         1,121         3  Neither agree nor disagree
+                         1,637         4  Somewhat disagree
+                         1,528         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a5                                                                              Q103a5. It is wise to flatter important people.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a5
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,589         1  Strongly agree
+                         2,288         2  Somewhat agree
+                           966         3  Neither agree nor disagree
+                         1,626         4  Somewhat disagree
+                         1,931         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q103a6                                                                        Q103a6. There is no excuse for lying to someone else.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q103a6
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,275         1  Strongly agree
+                         2,118         2  Somewhat agree
+                           642         3  Neither agree nor disagree
+                           847         4  Somewhat disagree
+                           518         5  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+emig                                                                         Q104. Do you think about emigrating from your country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q104
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,025         1  Yes
+                         6,375         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q105                                               Q105. Do you currently feel that your own personal as well as your family’s safe
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q105
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,194         1  Fully ensured
+                         3,806         2  Ensured
+                         1,647         3  Not ensured
+                           753         4  Absolutely not ensured
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q106                                               Q106. To what extent do you feel you are being treated equally by the government
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q106
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           972         1  To a great extent
+                         2,904         2  To a medium extent
+                         1,877         3  To a limited extent
+                         2,647         4  Not treated equally at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1071                                              Q1071. To what degree are you worried about the following situations? No possibi
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1071
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,223         1  Very much
+                         1,765         2  Much
+                           594         3  Not much
+                           519         4  Not at all
+                           299         5  Not applicable
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1072                                              Q1072. To what degree are you worried about the following situations? A terroris
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1072
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,938         1  Very much
+                         1,371         2  Much
+                           438         3  Not much
+                           634         4  Not at all
+                            19         5  Not applicable
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1074                                              Q1074. To what degree are you worried about the following situations? Being hara
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1074
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,682         1  Very much
+                         1,592         2  Much
+                           803         3  Not much
+                         1,244         4  Not at all
+                            79         5  Not applicable
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2011                                                   Q2011. How much trust do you have in the government (council of ministers)?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2011
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,052         1  A great deal of trust
+                         2,163         2  Quite a lot of trust
+                         2,054         3  Not very much trust
+                         3,131         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2012                                                             Q2012. How much trust do you have in the courts and legal system?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2012
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,386         1  A great deal of trust
+                         2,629         2  Quite a lot of trust
+                         2,123         3  Not very much trust
+                         2,262         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2013                                              Q2013. How much trust do you have in the elected council of representatives (the
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2013
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           605         1  A great deal of trust
+                         1,458         2  Quite a lot of trust
+                         2,091         3  Not very much trust
+                         4,246         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2014                                                                              Q2014. How much trust do you have in the police?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2014
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,040         1  A great deal of trust
+                         2,577         2  Quite a lot of trust
+                         1,582         3  Not very much trust
+                         1,201         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2016                                                             Q2016. How much trust do you have in the armed forces (the army)?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2016
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,091         1  A great deal of trust
+                         1,816         2  Quite a lot of trust
+                           862         3  Not very much trust
+                           631         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q20113                                                                     Q20113. How much trust do you have in religious leaders?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q20113
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,346         1  A great deal of trust
+                         2,656         2  Quite a lot of trust
+                         2,202         3  Not very much trust
+                         2,196         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q20120                                                                     Q20120. How much trust do you have in political parties?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q20120
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           225         1  A great deal of trust
+                           889         2  Quite a lot of trust
+                         2,079         3  Not very much trust
+                         5,207         4  No trust at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q202                                               Q202. In your opinion, is the state currently undertaking far-reaching and radic
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q202
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           972         1  Yes, definitely
+                         3,620         2  Yes
+                         2,244         3  No
+                         1,564         4  No, definitely not
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q204a1                                                    Q204a1. How satisfied are you with the educational system in our country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q204a1
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           861         1  Definitely satisfied
+                         3,257         2  Satisfied
+                         2,271         3  Dissatisfied
+                         2,011         4  Definitely dissatisfied
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q204a2                                                     Q204a2. How satisfied are you with the healthcare system in our country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q204a2
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           680         1  Definitely satisfied
+                         2,939         2  Satisfied
+                         2,412         3  Dissatisfied
+                         2,369         4  Definitely dissatisfied
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2041                                              Q2041. How would you evaluate the current government’s performance on managing t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2041
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           246         1  Very good
+                         2,434         2  Good
+                         3,342         3  Bad
+                         2,339         4  Very bad
+                            39         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2042                                              Q2042. How would you evaluate the current government’s performance on creating e
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2042
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           133         1  Very good
+                         1,336         2  Good
+                         3,022         3  Bad
+                         3,843         4  Very bad
+                            66         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2043                                              Q2043. How would you evaluate the current government’s performance on narrowing 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2043
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           147         1  Very good
+                         1,250         2  Good
+                         2,985         3  Bad
+                         3,807         4  Very bad
+                           211         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2044                                              Q2044. How would you evaluate the current government’s performance on improving 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2044
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           379         1  Very good
+                         3,244         2  Good
+                         2,560         3  Bad
+                         2,198         4  Very bad
+                            19         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q20420                                             Q20420. How would you evaluate the current government’s performance on keeping p
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q20420
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           150         1  Very good
+                         1,238         2  Good
+                         2,851         3  Bad
+                         4,072         4  Very bad
+                            89         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q20421                                             Q20421. How would you evaluate the current government’s performance on providing
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q20421
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,010         1  Very good
+                         3,821         2  Good
+                         1,308         3  Bad
+                         1,201         4  Very bad
+                            60         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q20422                                             Q20422. How would you evaluate the current government’s performance on addressin
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q20422
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           644         1  Very good
+                         3,450         2  Good
+                         2,483         3  Bad
+                         1,805         4  Very bad
+                            18         5  This is not the government’s
+                                          responsibility (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2061                                              Q2061. What are the two most important challenges your country is facing today? 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2061
+
+                 range:  [1,9]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,985         1  Economic situation (poverty;
+                                          unemployment, inflation)
+                         1,545         2  Financial and administrative
+                                          corruption
+                           165         3  Democracy
+                           557         6  Internal stability and security
+                           331         7  Foreign interference
+                           529         8  Religious extremism
+                           288         9  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2062                                              Q2062. What are the two most important challenges your country is facing today? 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2062
+
+                 range:  [1,9]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,514         1  Economic situation (poverty;
+                                          unemployment, inflation)
+                         2,981         2  Financial and administrative
+                                          corruption
+                           271         3  Democracy
+                         1,183         6  Internal stability and security
+                           688         7  Foreign interference
+                           756         8  Religious extremism
+                         1,007         9  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q210                                               Q210. To what extent do you think that there is corruption within the state agen
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q210
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,833         1  To a large extent
+                         2,557         2  To a medium extent
+                           755         3  To a small extent
+                           255         4  Not at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q213                                               Q213. Some people say that nowadays it is impossible to get a job without connec
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q213
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,682         1  Obtaining employment through
+                                          connections is extremely
+                                          widespread
+                         2,026         2  Employment is sometimes obtained
+                                          through connections
+                           262         3  Employment is mostly obtained
+                                          without connections
+                           430         4  I do not know of any relevant
+                                          experiences
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q214                                               Q214. Have you personally or any of your relatives or anyone you know been deman
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q214
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,333         1  Yes
+                         6,067         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q216                                               Q216. Citizens must support the government’s decisions even if they disagree wit
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q216
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           959         1  I strongly agree
+                         2,195         2  I agree
+                         3,063         3  I disagree
+                         2,183         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q217                                               Q217. Do you think that people nowadays can criticize their government without f
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q217
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,706         1  Yes
+                         2,694         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2181                                                                     Q2181. Government employees are aware of citizens’ needs.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2181
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,931         1  I strongly agree
+                         3,122         2  I agree
+                         2,032         3  I disagree
+                         1,315         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2182                                                   Q2182. Political leaders are concerned with the needs of ordinary citizens.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2182
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           326         1  I strongly agree
+                         1,486         2  I agree
+                         3,022         3  I disagree
+                         3,566         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2185                                              Q2185. Sometimes, politics are so complicated that I cannot understand what is h
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2185
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,799         1  I strongly agree
+                         3,104         2  I agree
+                           990         3  I disagree
+                           507         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q261a1                                                                      Q261a1. Where would you rate politicians on this scale?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q261a1, but 5 nonmissing values are not labeled
+
+                 range:  [1,7]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           816         1  Unintelligent
+                           660         2  
+                         1,055         3  
+                         1,471         4  
+                         2,410         5  
+                         1,022         6  
+                           966         7  Intelligent
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q261a2                                                                      Q261a2. Where would you rate politicians on this scale?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q261a2, but 5 nonmissing values are not labeled
+
+                 range:  [1,7]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,097         1  Dishonest
+                         1,400         2  
+                         1,429         3  
+                         1,272         4  
+                           756         5  
+                           259         6  
+                           187         7  Honest
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q261b1                                                         Q261b1. Where would you rate citizens of your country on this scale?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q261a1, but 5 nonmissing values are not labeled
+
+                 range:  [1,7]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           349         1  Unintelligent
+                           374         2  
+                           785         3  
+                         1,739         4  
+                         2,346         5  
+                         1,368         6  
+                         1,439         7  Intelligent
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q261b2                                                         Q261b2. Where would you rate citizens of your country on this scale?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q261b2, but 5 nonmissing values are not labeled
+
+                 range:  [1,7]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           696         1  Dishonest
+                           703         2  
+                         1,237         3  
+                         2,369         4  
+                         1,888         5  
+                           895         6  
+                           612         7  Honest
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q263                                                                    Q263. Which of the following statements best describes you?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q263
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,629         1  I prefer helping the poor, even
+                                          at a large personal cost
+                         4,405         2  I prefer helping the poor, even
+                                          at a small personal cost
+                         1,186         3  I prefer helping the poor, but
+                                          if this costs nothing to me
+                           180         4  I prefer not helping the poor
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q264                                               Q264. There are lots of reasons that one might want to help the poor. Of the rea
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q264
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,924         1  I want to help the poor because
+                                          it makes me sad to see people
+                                          suffer
+                           608         2  I want to help the poor because
+                                          I want to make my country and my
+                                          community better
+                         1,305         3  I want to help the poor because
+                                          I enjoy making those more
+                                          unfortunate happy
+                         4,563         4  I want to help the poor because
+                                          I know God will reward me for it
+                                          in the hereafter
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q265                                               Q265. Statement 1: The best way to reduce poverty is to increase your taxes so t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q265
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,128         1  Agree with Statement 1
+                         5,337         2  Agree with statement 2
+                         1,478         3  Agree with neither statement (Do
+                                          not read)
+                           457         4  Agree with both Statements (Do
+                                          not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q301                                               Q301. Did you vote in the last parliamentary elections election that took place?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q301
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,228         1  Yes
+                         4,172         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q302                                               Q302. During the last parliamentary elections that were held on in your country,
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q302
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,261         1  Yes
+                         7,139         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q303                                               Q303. In general, how would you evaluate the last parliamentary elections that w
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q303
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,961         1  Completely free and fair
+                         3,755         2  Free and fair, but with minor
+                                          problems
+                           967         3  Free and fair, with major
+                                          problems
+                         1,717         4  Not free or fair
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q403                                               Q403. When you want to get newspapers, magazines, foreign books, or view sites o
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q403
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           747         1  Yes
+                         3,317         2  No
+                         4,336         3  Have not tried (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q404                                                               Q404. In general, to what extent are you interested in politics?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q404
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           754         1  Very interested
+                         1,565         2  Interested
+                         2,692         3  Somewhat interested
+                         3,389         4  Not interested at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q4061                                                       Q4061. In general, do you follow political news through the television?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q4061
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,287         1  Daily
+                         1,994         2  A number of times a week
+                           592         3  A number of times a month
+                         1,348         4  Rarely
+                         1,179         5  I don’t follow it ever
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q4062                                                  Q4062. In general, do you follow political news through the daily newspaper?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q4062
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           513         1  Daily
+                           658         2  A number of times a week
+                           588         3  A number of times a month
+                         1,674         4  Rarely
+                         4,967         5  I don’t follow it ever
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q409                                                                           Q409. On average, how often do you use the internet?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q409
+
+                 range:  [1,6]                        units:  1
+         unique values:  6                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,418         1  I am online almost all day
+                         2,068         2  Daily
+                         1,005         3  Several times a week
+                           251         4  Once a week
+                           230         5  Less than once a week
+                         3,428         6  I do not use the internet
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q4113                                                                 Q4113. Are you a member of or participant in a Facebook page?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q4113
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,094         1  Yes
+                         4,306         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q4114                                                               Q4114. Are you a member of or participant in a Twitter account?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q4114
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,034         1  Yes
+                         7,366         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q4116                                                            Q4116. Are you a member of or participant in an Instagram account?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q4116
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,245         1  Yes
+                         7,155         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q501                                                                   Q501. Are you a member of any organization or formal groups?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q501
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           979         1  Yes
+                         7,421         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q501b                                                                                 Q501b. Are you a member of a political party?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q501b
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           442         1  Yes
+                         7,958         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5021                                              Q5021. During the past three years, did you attend a meeting to discuss a subjec
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5021
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           441         1  Once
+                           641         2  More than once
+                         7,318         3  I have never participated
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5022                                              Q5022. During the past three years, did you participate in a protest, march or s
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5022
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           430         1  Once
+                           683         2  More than once
+                         7,287         3  I have never participated
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q514                                               Q514. Do you agree or disagree with this statement: 'Political reform should be 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q514
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,316         1  I strongly agree
+                         2,810         2  I agree
+                           692         3  I disagree
+                           582         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q515a1                                             Q515a1. If you have to choose only one from each four sets of statements that I 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q515a1
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,750         1  Government narrows the gap
+                                          between the rich and the poor
+                         2,128         2  People choose the government
+                                          leaders in free and fair
+                                          elections
+                         2,209         3  Government does not waste any
+                                          public money
+                         1,313         4  People are free to express their
+                                          political views openly
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q515a2                                             Q515a2. If you have to choose only one from each four sets of statements that I 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q515a2
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,085         1  Government ensures law and order
+                           860         2  Media is free to criticize the
+                                          things government does
+                         4,345         3  Government ensures job
+                                          opportunities for all
+                         1,110         4  Multiple parties compete fairly
+                                          in the election
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q515a3                                             Q515a3. If you have to choose only one from each four sets of statements that I 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q515a3
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,508         1  The legislature has oversight
+                                          over the government
+                         3,809         2  Basic necessities, like food,
+                                          clothes and shelter, are
+                                          provided for all
+                           700         3  People are free to organize
+                                          political groups
+                         2,383         4  Government provides people with
+                                          quality public services
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5181                                              Q5181. A parliamentary system in which nationalist, left wing, right wing, and I
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5181
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,923         1  Very suitable
+                         2,112         2  Suitable
+                         1,220         3  Somewhat suitable
+                         3,145         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5182                                              Q5182. A parliamentary system in which only Islamist parties compete in parliame
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5182
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           348         1  Very suitable
+                           866         2  Suitable
+                         1,212         3  Somewhat suitable
+                         5,974         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5183                                              Q5183. A political system governed by a strong authority which makes decisions w
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5183
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           343         1  Very suitable
+                           667         2  Suitable
+                           848         3  Somewhat suitable
+                         6,542         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5184                                              Q5184. A system governed by Islamic law in which there are no political parties 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5184
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           572         1  Very suitable
+                           871         2  Suitable
+                         1,135         3  Somewhat suitable
+                         5,822         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5185                                              Q5185. A parliamentary system in which only non-religious parties compete in par
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5185
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           418         1  Very suitable
+                           757         2  Suitable
+                         1,182         3  Somewhat suitable
+                         6,043         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q5186                                              Q5186. A government that provides for the needs of its citizens without giving t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q5186
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           540         1  Very suitable
+                           887         2  Suitable
+                         1,232         3  Somewhat suitable
+                         5,741         4  Not suitable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q523a                                              Q523a. Do think there is any type of human right violations committed by the gov
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q523a
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,474         1  Yes
+                         2,926         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q523                                               Q523. To what degree would you agree that the violation of human rights committe
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q523
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           935         1  Completely justified
+                         1,573         2  Somewhat justified
+                         1,175         3  Not very justified
+                         4,717         4  Not justifiable at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6011                                                    Q6011. A woman can become President or Prime Minister of a Muslim country.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6011
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,359         1  I strongly agree
+                         2,959         2  I agree
+                         1,483         3  I disagree
+                         1,599         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6012                                                               Q6012. A married woman can work outside the home if she wishes.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6012
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,394         1  I strongly agree
+                         3,714         2  I agree
+                           793         3  I disagree
+                           499         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6013                                                         Q6013. In general, men are better at political leadership than women.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6013
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,767         1  I strongly agree
+                         2,927         2  I agree
+                         1,811         3  I disagree
+                           895         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6014                                              Q6014. University education for males is more important than university educatio
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6014
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           469         1  I strongly agree
+                           808         2  I agree
+                         2,852         3  I disagree
+                         4,271         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6018                                                                    Q6018. Women and men should have equal inheritance rights.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6018
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         6,428         1  I strongly agree
+                         1,724         2  I agree
+                           176         3  I disagree
+                            72         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q60118                                               Q60118. Husbands should have final say in all decisions concerning the family.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q60118
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,600         1  I strongly agree
+                         2,457         2  I agree
+                         2,403         3  I disagree
+                           940         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6041                                              Q6041. To what degree would each of the following factors be an obstacle to acce
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6041
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,858         1  Constitute an obstacle to a
+                                          large degree
+                         1,719         2  Constitute an obstacle to a
+                                          moderate degree
+                         1,055         3  Constitute an obstacle to a
+                                          small degree
+                         2,768         4  Does not constitute an obstacle
+                                          at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6043                                              Q6043. To what degree would each of the following factors be an obstacle to acce
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6043
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           979         1  Constitute an obstacle to a
+                                          large degree
+                         1,381         2  Constitute an obstacle to a
+                                          moderate degree
+                         1,383         3  Constitute an obstacle to a
+                                          small degree
+                         4,657         4  Does not constitute an obstacle
+                                          at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q605                                                  Q605. Which of the following statements is the closest to your point of view?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q605
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,934         1  Laws of our country should be
+                                          based entirely on the sharia
+                           838         2  Laws of our country should be
+                                          based mostly on the sharia
+                         4,004         3  Laws of our country should be
+                                          based equally on sharia and the
+                                          will of the people
+                           571         4  Laws of our country should be
+                                          based mostly on the will of the
+                                          people
+                         1,053         5  Laws of our country should be
+                                          based entirely on the will of
+                                          the people
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q605a                                              Q605a. 1st sentence: I prefer a religious political party over a non-religious p
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q605a
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,266         1  I strongly agree with the 1st
+                                          sentence
+                         1,879         2  I agree with the 1st sentence
+                         1,703         3  I agree with the 2nd sentence
+                           901         4  I strongly agree with the 2nd
+                                          sentence
+                           651         5  Do not agree with either (Do not
+                                          read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6062                                              Q6062. Your country is better off if religious people hold public positions in t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6062
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           591         1  I strongly agree
+                         2,030         2  I agree
+                         3,571         3  I disagree
+                         2,208         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6063                                              Q6063. Religious clerics should have influence over the decisions of government.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6063
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           430         1  I strongly agree
+                         1,846         2  I agree
+                         3,775         3  I disagree
+                         2,349         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6064                                              Q6064. Religious practice is a private matter and should be separated from socio
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6064
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,208         1  I strongly agree
+                         2,748         2  I agree
+                         2,085         3  I disagree
+                         1,359         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6071                                              Q6071. Democracy is a Western form of government that is not compatible with Isl
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6071
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           517         1  I strongly agree
+                         1,443         2  I agree
+                         4,212         3  I disagree
+                         2,228         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6073                                              Q6073. Banks in Muslim countries must be forbidden from charging interest becaus
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6073
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,084         1  I strongly agree
+                         2,975         2  I agree
+                           928         3  I disagree
+                           413         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6074                                              Q6074. It is acceptable in Islam for male and female university students to atte
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6074
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,418         1  I strongly agree
+                         3,776         2  I agree
+                         1,461         3  I disagree
+                           745         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6076                                              Q6076. A woman should dress modestly, but Islam does not require that she wear a
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6076
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,285         1  I strongly agree
+                         2,786         2  I agree
+                         1,802         3  I disagree
+                         1,527         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6077                                              Q6077. In order to meet the demands of the modern economy, banks should be allow
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6077
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           908         1  I strongly agree
+                         2,322         2  I agree
+                         3,202         3  I disagree
+                         1,968         4  I strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid1a                                              AID1a. Over the past 5 years, have you or someone in your family (members of the
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid1a
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           874         1  Yes
+                         7,526         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid2                                               AID2. In general, how satisfied are you with youth educational programs outside 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid2
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,498         1  Very satisfied
+                         5,126         2  Satisfied
+                         1,164         3  Not satisfied
+                           612         4  Not satisfied at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid31                                              AID31. Which of these things would be the most important reason for a person to 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid31
+
+                 range:  [1,8]                        units:  1
+         unique values:  8                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,132         1  Working for a degree / a
+                                          certificate
+                         1,393         2  Working for other qualification
+                         2,222         3  To acquire a new skill for a job
+                           471         4  To acquire a new skill for a
+                                          personal interest
+                           612         5  To further an interest
+                           103         6  To meet people
+                           412         7  To make a better person
+                            55         8  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid32                                              AID32. Which of these things would be the second most important reason for a per
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid32
+
+                 range:  [1,8]                        units:  1
+         unique values:  8                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,088         1  Working for a degree / a
+                                          certificate
+                         1,206         2  Working for other qualification
+                         3,138         3  To acquire a new skill for a job
+                           874         4  To acquire a new skill for a
+                                          personal interest
+                           993         5  To further an interest
+                           289         6  To meet people
+                           783         7  To make a better person
+                            29         8  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid41                                              AID41. Which of these things would be the biggest problem/ barrier preventing a 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid41
+
+                 range:  [1,15]                       units:  1
+         unique values:  15                       missing .:  0/8,400
+
+              examples:  1     Cost
+                         1     Cost
+                         1     Cost
+                         3     Time
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid42                                              AID42. Which of these things would be the second most important reason for a per
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+                 label:  aid42
+
+                 range:  [1,15]                       units:  1
+         unique values:  15                       missing .:  0/8,400
+
+              examples:  2     Transportation
+                         2     Transportation
+                         4     Information
+                         7     Physical access
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid5a                                              AID5a. Statement 1: Giving the correct answer to a question remains the most imp
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid5a
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,774         1  Agree very strongly with
+                                          statement 1
+                         1,539         2  Agree with statement 1
+                         2,582         3  Agree with statement 2
+                         2,397         4  Agree very strongly with
+                                          statement 2
+                           108         5  Agree with neither (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid5b                                              AID5b. Statement 1: Giving the correct answer to a question remains the most imp
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid5b
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           690         1  Agree very strongly with
+                                          statement 1
+                         1,121         2  Agree with statement 1
+                         2,887         3  Agree with statement 2
+                         3,635         4  Agree very strongly with
+                                          statement 2
+                            67         5  Agree with neither (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid5c                                              AID5c. Statement 1:  A good education system is one that encourages the student 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid5c
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           677         1  Agree very strongly with
+                                          statement 1
+                         1,155         2  Agree with statement 1
+                         2,946         3  Agree with statement 2
+                         3,525         4  Agree very strongly with
+                                          statement 2
+                            97         5  Agree with neither (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid5d                                              AID5d. Statement 1: Examinations that allow students to demonstrate how well the
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid5d
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           535         1  Agree very strongly with
+                                          statement 1
+                           937         2  Agree with statement 1
+                         2,877         3  Agree with statement 2
+                         3,923         4  Agree very strongly with
+                                          statement 2
+                           128         5  Agree with neither (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+aid5e                                              AID5e. Statement 1: The education system should place primary importance on acad
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  aid5e
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,377         1  Agree very strongly with
+                                          statement 1
+                         1,620         2  Agree with statement 1
+                         2,799         3  Agree with statement 2
+                         2,448         4  Agree very strongly with
+                                          statement 2
+                           156         5  Agree with neither (Do not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7001                                              Q7001. Do you prefer that future economic relations between your country and the
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7001
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,332         1  Become stronger than they were
+                                          in previous years
+                         2,080         2  Remain the same as they were in
+                                          previous years
+                         1,988         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7002                                              Q7002. Do you prefer that future economic relations between your country and Sau
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7002
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,107         1  Become stronger than they were
+                                          in previous years
+                         1,862         2  Remain the same as they were in
+                                          previous years
+                         1,431         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7003                                              Q7003. Do you prefer that future economic relations between your country and Ira
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7003
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,878         1  Become stronger than they were
+                                          in previous years
+                         1,913         2  Remain the same as they were in
+                                          previous years
+                         4,609         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7004                                              Q7004. Do you prefer that future economic relations between your country and Tur
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7004
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,639         1  Become stronger than they were
+                                          in previous years
+                         1,944         2  Remain the same as they were in
+                                          previous years
+                         1,817         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7007                                              Q7007. Do you prefer that future economic relations between your country and the
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7007
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,925         1  Become stronger than they were
+                                          in previous years
+                         2,140         2  Remain the same as they were in
+                                          previous years
+                         1,335         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7008                                              Q7008. Do you prefer that future economic relations between your country and Rus
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7008
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,393         1  Become stronger than they were
+                                          in previous years
+                         2,007         2  Remain the same as they were in
+                                          previous years
+                         2,000         3  Become weaker than they were in
+                                          previous years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7011                                              Q7011. Do you think the influence of the United States on the development of dem
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7011
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           471         1  Very positive
+                         1,379         2  Somewhat positive
+                         3,094         3  Neither positive nor negative
+                         1,673         4  Somewhat negative
+                         1,783         5  Very negative
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7012                                              Q7012. Do you think the influence of the European Union on the development of de
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7012
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           603         1  Very positive
+                         1,903         2  Somewhat positive
+                         3,427         3  Neither positive nor negative
+                         1,352         4  Somewhat negative
+                         1,115         5  Very negative
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7013                                              Q7013. Do you think the influence of neighboring countries on the development of
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7013
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           442         1  Very positive
+                         1,500         2  Somewhat positive
+                         3,390         3  Neither positive nor negative
+                         1,651         4  Somewhat negative
+                         1,417         5  Very negative
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7014                                              Q7014. Do you think the influence of Russia on the development of democracy in y
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7014
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           450         1  Very positive
+                         1,192         2  Somewhat positive
+                         4,548         3  Neither positive nor negative
+                         1,142         4  Somewhat negative
+                         1,068         5  Very negative
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q713                                               Q713. What policy do you think would be the most positive thing that the US coul
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q713
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           584         1  Promoting democracy
+                         1,284         2  Promoting economic development
+                         2,179         3  Resolving the Arab-Israeli
+                                          conflict
+                           306         4  Promoting women’s rights
+                         4,047         5  The US should not get involved
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q701b                                              Q701b. People disagree on whether the world becoming more connected is a good th
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q701b
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,633         1  Very good
+                         3,361         2  Somewhat good
+                         1,234         3  Neither good nor bad
+                           693         4  Somewhat bad
+                           479         5  Very bad
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q704                                                                                       Q704. Are American demands for reform...
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q704
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           772         1  Acceptable
+                         3,376         2  Acceptable with conditions
+                         1,606         3  Unacceptable on principle
+                         2,646         4  Unacceptable because they are
+                                          harmful to national interests
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q705                                               Q705. Some people attribute the lack of development in the Arab world compared t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q705
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,307         1  Internal factors
+                         2,386         2  External factors
+                         3,707         3  Both are equally important (Do
+                                          not read)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q707                                               Q707. Do you agree with the following statement: 'Despite negative US foreign po
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q707
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         6,151         1  Agree
+                         2,249         2  Disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q708                                               Q708. Do you agree or disagree with the following statement: American and Wester
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q708
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,787         1  Strongly agree
+                         4,764         2  Agree
+                         1,311         3  Disagree
+                           538         4  Strongly disagree
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q709a                                              Q709a. Do you support or oppose the solution to the Arab-Israeli conflict based 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+                 label:  q709a
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,399         1  Support
+                         5,001         2  Oppose
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7114                                                         Q7114. Western interference is an obstacle to reform in your country.
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7114
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,881         1  Agree to a large extent
+                         2,822         2  Agree to some extent
+                         1,190         3  Don’t agree
+                           507         4  Don’t agree at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q7115                                              Q7115. Interference from Arab or Islamic countries within the region is an obsta
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q7115
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,174         1  Agree to a large extent
+                         3,566         2  Agree to some extent
+                         1,873         3  Don’t agree
+                           787         4  Don’t agree at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q714                                                     Q714. What country poses the greatest threat to stability in your country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (double)
+                 label:  q714
+
+                 range:  [1,10]                       units:  1
+         unique values:  10                       missing .:  0/8,400
+
+              examples:  2     Israel
+                         2     Israel
+                         2     Israel
+                         7     Syria
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q832                                               Q832. In your opinion, which of the following potential solutions do you favor t
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+                 label:  q832
+
+                 range:  [1,6]                        units:  1
+         unique values:  6                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,692         1  Reforms led by the current
+                                          government
+                         3,686         2  Holding free and fair elections
+                                          under international supervision
+                         1,042         3  Military intervention by an Arab
+                                          coalition
+                         1,006         4  Military intervention by an
+                                          international coalition
+                                          including Arab and Western
+                                          countries
+                           818         5  None of the above
+                           156         6  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q833                                               Q833. How concerned are you that sectarian division is growing across the region
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q833
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,571         1  Concerned to a great extent
+                         2,204         2  Concerned to a medium extent
+                           592         3  Concerned to a small extent
+                         1,033         4  Not concerned at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q8341                                              Q8341. Please tell me to what degree you would describe yourself as feeling angr
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q8341
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,333         1  Very angry
+                         1,933         2  Somewhat angry
+                         1,407         3  Not very angry
+                         1,727         4  Not angry at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q8342                                              Q8342. Please tell me to what degree you would describe yourself as feeling angr
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q8342
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,864         1  Very angry
+                         1,650         2  Somewhat angry
+                         1,138         3  Not very angry
+                         1,748         4  Not angry at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q8343                                              Q8343. Please tell me to what degree you would describe yourself as feeling angr
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q8343
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,251         1  Very angry
+                         1,930         2  Somewhat angry
+                         1,499         3  Not very angry
+                         1,720         4  Not angry at all
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q901                                               Q901. If you have been asked to identify yourself, with which of the following d
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q901
+
+                 range:  [1,7]                        units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,804         1  Your country of birth
+                         2,379         2  Muslim/Christian (Religion)
+                           310         3  Arab (Ethnicity)
+                           336         4  Region (GCC, Maghreb, etc.)
+                           380         5  Local community, city where I
+                                          live
+                           722         6  Your tribe or extended family
+                           469         7  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1001c                                                              Q1001c. How many years have you lived in the area you live now?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q1001c, but label does not exist
+
+                 range:  [0,90]                       units:  .1
+         unique values:  88                       missing .:  0/8,400
+
+                  mean:   29.9103
+              std. dev:   16.2298
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 9        19        28        40        53
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1002                                                                                                                 Q1002. Gender
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1002
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,195         1  Male
+                         4,205         2  Female
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1004                                                                                                           Q1004. Do you work?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1004
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,537         1  Yes
+                         4,863         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1010                                                                                                         Q1010. Marital Status
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1010
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,162         1  Unmarried or Bachelor
+                         5,499         2  Married
+                           182         3  Divorced or separated
+                           402         4  Widowed
+                           155         5  Engaged
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1010b                                                                            Q1010b. How many children live at this household?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1010b, but 13 nonmissing values are not labeled
+
+                 range:  [0,12]                       units:  1
+         unique values:  13                       missing .:  0/8,400
+
+              examples:  1     
+                         2     
+                         2     
+                         3
+     
+-----------------------------------------------------------------------------------------------------------------------------------
+q1010d                                                                                                                      q1010d. How many people live at this household?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1010d
+
+                 range:  [0,11]                       units:  1
+         unique values:  11                       missing .:  0/8,400
+
+              examples:  1     
+                         2     
+                         2     
+                         3
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011a                                                                 Q1011a. Do you have one computer at least at your residence?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011a
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,651         1  Yes
+                         3,749         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011b                                                                                                   Q1011b. Do you have a car?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011b
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,069         1  Yes
+                         5,331         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011c                                             Q1011c. Do you have a mobile phone or a smartphone with access to internet conne
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011c
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         3,751         1  Mobile
+                         4,291         2  Smartphone
+                           358         3  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011d                                                                 Q1011d. Do you have basic sanitation at your residence?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011d
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,224         1  Yes
+                         4,176         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011e                                                                 Q1011e. Do you have access to basic healthcare?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011e
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,131         1  Yes
+                         4,269         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011f                                                                                                                      Q1011f. How many rooms has your residence?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+                 label:  q1011f, but label does not exist
+
+                 range:  [1,8]                    units:  1
+         unique values:  8                        missing .:  0/8,400
+
+                  mean:    1.952
+              std. dev:    1.192
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 1        1          2         3         4
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011g                                                                 Q1011g. Do you own real estate property?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011g
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,183         1  Yes
+                         4,217         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011h                                                                 Q1011h. Do you live together with your parents?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011h
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,140         1  Yes
+                         4,260         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011i                                                                 Q1011i. Do you live together with other people than your family?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011i
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,298         1  Yes
+                         4,102         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1011j                                                                 Q1011j. Do you have pets?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1011i
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,207         1  Yes
+                         4,193         2  No
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q609                                                                            Q609. In general, you would describe yourself as...
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q609
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,955         1  Religious
+                         4,556         2  Somewhat religious
+                           889         3  Not religious
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6101                                                                                                     Q6101. Do you pray daily?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6101
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,402         1  Always
+                         1,306         2  Most of the time
+                           831         3  Sometimes
+                           355         4  Rarely
+                           506         5  Never
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q6106                                              Q6106. Do you listen to or read the Quran/the Bible or other religious programs 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q6106
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,595         1  Always
+                         2,053         2  Most of the time
+                         2,460         3  Sometimes
+                         1,013         4  Rarely
+                           279         5  Never
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1012                                                                                                               Q1012. Religion
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q1012
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         7,708         1  Muslim
+                           591         2  Christian
+                           101         3  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1016                                              Q1016. Which of these statements comes closest to describing your household inco
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1016
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           959         1  Our household income covers our
+                                          expenses well and we are able to
+                                          save.
+                         2,771         2  Our household income covers our
+                                          expenses without notable
+                                          difficulties.
+                         3,063         3  Our household income does not
+                                          cover our expenses and we face
+                                          some difficulties in meeting our
+                                          needs.
+                         1,607         4  Our household income does not
+                                          cover our expenses and we face
+                                          significant difficulties in
+                                          meeting our needs.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1017                                                       Q1017. Does your family receive remittances from someone living abroad?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1017
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           166         1  Yes, monthly
+                           331         2  Yes, a few times a year
+                           245         3  Yes, once a year
+                         7,658         4  We do not receive anything
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q2008                                                                                         Q2008. Enumerator: Interviewer gender
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q2008
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,416         1  Male
+                         5,984         2  Female
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q511_combined                                                           In your opinion, to what extent is your country democratic?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject, but 9 nonmissing values are not labeled
+
+                 range:  [0,10]                       units:  1
+         unique values:  11                       missing .:  0/8,400
+
+              examples:  3     
+                         5     
+                         5     
+                         7     
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q512_combined                                                To what extent do you think democracy is appropriate for your country?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject2, but 9 nonmissing values are not labeled
+
+                 range:  [0,10]                       units:  1
+         unique values:  11                       missing .:  0/8,400
+
+              examples:  3     
+                         5     
+                         6     
+                         8     
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q513_combined                                                   To what extent are you satisfied with the government’s performance?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject3, but 9 nonmissing values are not labeled
+
+                 range:  [0,10]                       units:  1
+         unique values:  11                       missing .:  0/8,400
+
+              examples:  2     
+                         4     
+                         5     
+                         6     
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1005_combined                                                                                                          Are You...?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject4
+
+                 range:  [1,6]                        units:  1
+         unique values:  6                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           545         1  Retired
+                         2,665         2  Housewife
+                           674         3  Student
+                            33         4  Other
+                           920         5  Unemployed
+                         3,563         6  Employed
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1006_combined                                                                                  Do You Work Full-Time or Part-Time?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject5
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         2,502         1  Full Time (30 Hours or More)
+                           990         2  Part Time (Less than 30 Hours)
+                         4,908         3  Unemployed
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1006a_combined                                                                                               Economic/Work Sector?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject6
+
+                 range:  [1,4]                        units:  1
+         unique values:  4                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           929         1  Public
+                         2,430         2  Private
+                           152         3  Other
+                         4,889         4  Unemployed
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1006a                                                                                                           Q1006a Do you like your job?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  q1006a
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,257         1  Yes
+                         4,143         2  No
+
+-----------------------------------------------------------------------------------------------------------------------------------
+q1008
+Q1008 How many years of experience do you have on your job?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q1008
+
+                 range:  [1,5]                        units:  1
+         unique values:  5                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         1,076         1  1 Year
+                         2,103         2  2 Years
+                         2,099         3  3 Years
+                         2,073         4  4 Years
+                         1,049         5  >4 Years
+
+-----------------------------------------------------------------------------------------------------------------------------------
+edu_combined                                                                                                     Level of Education
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject7
+
+                 range:  [1,6]                        units:  1
+         unique values:  6                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                           884         1  Illiterate/No Formal Education
+                         1,256         2  Elementary
+                         1,463         3  Prepatory/Basic
+                         2,985         4  Secondary (Inc.
+                                          Professional/Technical Diploma)
+                         1,484         5  BA
+                           328         6  Above BA
+
+-----------------------------------------------------------------------------------------------------------------------------------
+income_categories                                                                                  Income Category (within Country)
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject8, but 10 nonmissing values are not labeled
+
+                 range:  [1,12]                       units:  1
+         unique values:  12                       missing .:  0/8,400
+
+              examples:  2     
+                         3     
+                         6     
+                         10    
+
+-----------------------------------------------------------------------------------------------------------------------------------
+first_language                                                                                                       First Language
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject9
+
+                 range:  [1,30]                       units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         8,021         1  Arabic
+                           338         3  Amazight
+                            41        30  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+second_language                                                                                                     Second Language
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  labelobject10
+
+                 range:  [0,30]                       units:  1
+         unique values:  7                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         4,508         0  None
+                           102         1  Arabic
+                         2,193         2  French
+                           161         3  Amazight
+                         1,272         5  English
+                            95        10  Hebrew
+                            69        30  Other
+
+-----------------------------------------------------------------------------------------------------------------------------------
+region                                                                                                                  Urban/Rural
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  q13
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  0/8,400
+
+            tabulation:  Freq.   Numeric  Label
+                         5,526         1  Urban
+                         2,714         2  Rural
+                           160         3  Refugee camp
+
+-----------------------------------------------------------------------------------------------------------------------------------
+age                                                                                                                      Q1001. Age
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+                 label:  q1001, but label does not exist
+
+                 range:  [18,93]                      units:  1
+         unique values:  72                       missing .:  0/8,400
+
+                  mean:   39.9532
+              std. dev:    14.518
+
+           percentiles:        10%       25%       50%       75%       90%
+                                22        28        38        50        60
