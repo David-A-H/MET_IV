@@ -1,0 +1,174 @@
+original_label,description,new_label
+age,Age of Respondent, age_of_respondent
+aid1a,Assistance in the past 5 years,    assistance_in_past_5_years
+aid2,Satisfaction with youth educational programs,    satisfaction_with_youth_educational_programs
+aid31,Importance of Education for Males,    importance_of_education_for_males
+aid32,Importance of Education for Females,    importance_of_education_for_females
+aid41,Perceived quality of educational programs,    perceived_quality_of_educational_programs
+aid42,Second most important reason for personal choices,    second_most_important_reason_for_choices
+aid5a,Agreement with statement 1,    agreement_statement_1
+aid5b,Agreement with statement 2,    agreement_statement_2
+aid5c,Agreement with statement 3,    agreement_statement_3
+aid5d,Agreement with statement 4,    agreement_statement_4
+aid5e,Agreement with statement 5,    agreement_statement_5
+country,Country of Residence,    country_of_residence
+edu_combined,Combined Education Level,    combined_education_level
+emig,Emigration Status,    emigration_status
+first_language,First Language Spoken,    first_language_spoken
+income_categories,Income Category,    income_category
+q1,General Satisfaction,    general_satisfaction
+q1001c,Mobile Phone Ownership,    mobile_phone_ownership
+q1002,Gender of Respondent,    gender_of_respondent
+q1004,Employment Status,    employment_status
+q1005_combined,Combined Employment and Education Status,    combined_employment_education_status
+q1006_combined,Combined Social Identity,    combined_social_identity
+q1006a,Specific Social Identity,    specific_social_identity
+q1006a_combined,Combined Specific Social Identity,    combined_specific_social_identity
+q1008,Views on Economic Relations,    views_on_economic_relations
+q101,Attitudes towards Western Influences,    attitudes_towards_western_influences
+q1010,Social Media Usage,    social_media_usage
+q1010b,Internet Access Convenience,    internet_access_convenience
+q1010d,Perceived Benefits of Internet Access,    perceived_benefits_of_internet_access
+q1011a,Awareness of Human Rights,    awareness_of_human_rights
+q1011b,Mobile Phone Usage,    mobile_phone_usage
+q1011c,Internet Accessibility,    internet_accessibility
+q1011d,Participation in Online Services,    participation_in_online_services
+q1011e,Level of Trust in Online Information,    trust_in_online_information
+q1011f,Views on Digital Privacy,    views_on_digital_privacy
+q1011g,Frequency of Online Transactions,    frequency_of_online_transactions
+q1011h,Preferred Online Platforms,    preferred_online_platforms
+q1011i,Perceived Security Online,    perceived_security_online
+q1011j,Engagement with Social Issues,    engagement_with_social_issues
+q1012,Satisfaction with Online Services,    satisfaction_with_online_services
+q1016,Perspectives on Gender Equality,    perspectives_on_gender_equality
+q1017,Views on Cultural Norms,    views_on_cultural_norms
+q101a,Perspectives on Health Care,    perspectives_on_health_care
+q102,Satisfaction with Government Services,    satisfaction_with_government_services
+q102b,Trust in Political Institutions,    trust_in_political_institutions
+q103,Voting Participation,    voting_participation
+q103a1,Priority in National Issues,    priority_in_national_issues
+q103a2,Views on Reform,    views_on_reform
+q103a3,Assessment of Social Justice,    assessment_of_social_justice
+q103a4,Views on Community Engagement,    views_on_community_engagement
+q103a5,Importance of Civic Participation,    importance_of_civic_participation
+q103a6,Trust in Local Authorities,    trust_in_local_authorities
+q105,Opinions on Military Intervention,    opinions_on_military_intervention
+q106,Attitudes towards Foreign Policies,    attitudes_towards_foreign_policies
+q1071,Awareness of Social Issues,    awareness_of_social_issues
+q1072,Engagement with Community Leaders,    engagement_with_community_leaders
+q1074,Support for Social Campaigns,    support_for_social_campaigns
+q2,Evaluation of Democracy,    evaluation_of_democracy
+q2008,Historical Context of Governance,    historical_context_of_governance
+q2011,Assessment of Economic Conditions,    assessment_of_economic_conditions
+q20113,Views on Foreign Relations,    views_on_foreign_relations
+q2012,Opinions on Environmental Policies,    opinions_on_environmental_policies
+q20120,Perspectives on Immigration Policies,    perspectives_on_immigration_policies
+q2013,Views on Global Security Issues,    views_on_global_security_issues
+q2014,Opinions on Trade Agreements,    opinions_on_trade_agreements
+q2016,Evaluation of Economic Growth,    evaluation_of_economic_growth
+q202,Perspectives on Global Cooperation,    perspectives_on_global_cooperation
+q2041,Engagement with International Policies,    engagement_with_international_policies
+q2042,Trust in Global Institutions,    trust_in_global_institutions
+q20420,Views on National Security Policies,    views_on_national_security_policies
+q20421,Perspectives on Global Development Issues,    perspectives_on_global_development_issues
+q20422,Opinions on Economic Development,    opinions_on_economic_development
+q2043,Attitudes towards Globalization,    attitudes_towards_globalization
+q2044,Engagement with Global Issues,    engagement_with_global_issues
+q204a1,Awareness of Human Rights Violations,    awareness_of_human_rights_violations
+q204a2,Support for Human Rights Initiatives,    support_for_human_rights_initiatives
+q2061,Awareness of Gender Issues,    awareness_of_gender_issues
+q2062,Engagement with Gender Equality Campaigns,    engagement_with_gender_equality_campaigns
+q210,Awareness of Economic Disparities,    awareness_of_economic_disparities
+q213,Support for Economic Support Systems,    support_for_economic_support_systems
+q214,Perspectives on Social Welfare Policies,    perspectives_on_social_welfare_policies
+q216,Attitudes towards Education Access,    attitudes_towards_education_access
+q217,Awareness of Youth Programs,    awareness_of_youth_programs
+q2181,Opinions on Education Policies,    opinions_on_education_policies
+q2182,Support for Educational Reforms,    support_for_educational_reforms
+q2185,Engagement with Adult Education Programs,    engagement_with_adult_education_programs
+q261a1,Awareness of Migration Issues,    awareness_of_migration_issues
+q261a2,Support for Migration Policies,    support_for_migration_policies
+q261b1,Understanding of Refugee Issues,    understanding_of_refugee_issues
+q261b2,Awareness of Migrant Rights,    awareness_of_migrant_rights
+q263,Engagement with Diversity Issues,    engagement_with_diversity_issues
+q264,Opinions on Cultural Heritage,    opinions_on_cultural_heritage
+q265,Support for Cultural Initiatives,    support_for_cultural_initiatives
+q301,Attitudes towards Digital Literacy,    attitudes_towards_digital_literacy
+q302,Level of Internet Literacy,    level_of_internet_literacy
+q303,Engagement with Technology,    engagement_with_technology
+q403,Opinions on Economic Practices,    opinions_on_economic_practices
+q404,Awareness of Ethical Practices,    awareness_of_ethical_practices
+q4061,Attitudes towards Corporate Accountability,    attitudes_towards_corporate_accountability
+q4062,Support for Environmental Sustainability,    support_for_environmental_sustainability
+q409,Awareness of Civil Rights,    awareness_of_civil_rights
+q4113,Engagement with Health Care Systems,    engagement_with_health_care_systems
+q4114,Support for Youth Engagement,    support_for_youth_engagement
+q4116,Opinions on Healthcare Accessibility,    opinions_on_healthcare_accessibility
+q501,Awareness of Political Rights,    awareness_of_political_rights
+q501b,Engagement with Political Campaigns,    engagement_with_political_campaigns
+q5021,Perspectives on National Identity,    perspectives_on_national_identity
+q5022,Opinions on Cultural Identity,    opinions_on_cultural_identity
+q511_combined,Combined Awareness of Social Issues,    combined_awareness_of_social_issues
+q512_combined,Combined Engagement with Political Issues,    combined_engagement_with_political_issues
+q513_combined,Combined Opinions on Governance,    combined_opinions_on_governance
+q514,Awareness of Economic Justice,    awareness_of_economic_justice
+q515a1,Views on Public Services,    views_on_public_services
+q515a2,Support for Local Initiatives,    support_for_local_initiatives
+q515a3,Perspectives on Community Development,    perspectives_on_community_development
+q5181,Opinions on Gender Roles,    opinions_on_gender_roles
+q5182,Engagement with Gender Policies,    engagement_with_gender_policies
+q5183,Awareness of Gender Inequality,    awareness_of_gender_inequality
+q5184,Support for Gender Equality Initiatives,    support_for_gender_equality_initiatives
+q5185,Attitudes towards Women's Rights,    attitudes_towards_womens_rights
+q5186,Perspectives on Youth Engagement,    perspectives_on_youth_engagement
+q523,Awareness of Environmental Issues,    awareness_of_environmental_issues
+q523a,Support for Environmental Policies,    support_for_environmental_policies
+q6011,Awareness of Educational Policies,    awareness_of_educational_policies
+q60118,Perspectives on Formal Education,    perspectives_on_formal_education
+q6012,Engagement with Non-Formal Education,    engagement_with_non_formal_education
+q6013,Support for Lifelong Learning,    support_for_lifelong_learning
+q6014,Awareness of Educational Equity,    awareness_of_educational_equity
+q6018,Perspectives on School Funding,    perspectives_on_school_funding
+q6041,Opinions on Accessibility of Education,    opinions_on_accessibility_of_education
+q6043,Awareness of Education Challenges,    awareness_of_education_challenges
+q605,Opinions on Political Ideologies,    opinions_on_political_ideologies
+q605a,Engagement with Political Ideologies,    engagement_with_political_ideologies
+q6062,Awareness of Civic Responsibilities,    awareness_of_civic_responsibilities
+q6063,Support for Civic Engagement,    support_for_civic_engagement
+q6064,Perspectives on Civic Rights,    perspectives_on_civic_rights
+q6071,Engagement with Community Programs,    engagement_with_community_programs
+q6073,Support for Volunteer Initiatives,    support_for_volunteer_initiatives
+q6074,Awareness of Social Justice Issues,    awareness_of_social_justice_issues
+q6076,Perspectives on Civic Participation,    perspectives_on_civic_participation
+q6077,Engagement with Local Governance,    engagement_with_local_governance
+q609,Awareness of Public Policy,    awareness_of_public_policy
+q6101,Opinions on International Relations,    opinions_on_international_relations
+q6106,Perspectives on Globalization,    perspectives_on_globalization
+q7001,Views on Economic Relations with various countries,    views_on_economic_relations_with_various_countries
+q7002,Preferences for Economic Relations with Saudi Arabia,    preferences_for_economic_relations_with_saudi_arabia
+q7003,Preferences for Economic Relations with Iran,    preferences_for_economic_relations_with_iran
+q7004,Preferences for Economic Relations with Turkey,    preferences_for_economic_relations_with_turkey
+q7007,Opinions on Economic Consensus,    opinions_on_economic_consensus
+q7008,Engagement with Global Economic Trends,    engagement_with_global_economic_trends
+q7011,Awareness of Global Trade Policies,    awareness_of_global_trade_policies
+q7012,Attitudes towards Regional Cooperation,    attitudes_towards_regional_cooperation
+q7013,Engagement with International Development,    engagement_with_international_development
+q7014,Perspectives on Global Governance,    perspectives_on_global_governance
+q701b,Engagement with Trade Agreements,    engagement_with_trade_agreements
+q704,Views on International Aid,    views_on_international_aid
+q705,Perspectives on Key Factors in Societal Reform,    perspectives_on_key_factors_in_societal_reform
+q707,Support for Economic Reform,    support_for_economic_reform
+q708,Awareness of Global Issues,    awareness_of_global_issues
+q709a,Engagement with International Organizations,    engagement_with_international_organizations
+q7114,Views on Western Interference,    views_on_western_interference
+q7115,Agreement with Local Obstacles,    agreement_with_local_obstacles
+q713,Opinions on Governance Reform,    opinions_on_governance_reform
+q714,Support for Civil Initiatives,    support_for_civil_initiatives
+q832,Preferences for Solutions to Current Issues,    preferences_for_solutions_to_current_issues
+q833,Engagement with Current Events,    engagement_with_current_events
+q8341,Awareness of Personal Feelings,    awareness_of_personal_feelings
+q8342,Engagement with Emotions,    engagement_with_emotions
+q8343,Awareness of Social Well-Being,    awareness_of_social_well_being
+q901,Engagement with Statistical Issues,    engagement_with_statistical_issues
+region,Geographic Region of Respondent,region
+second_language,Second Language Spoken,second_language
