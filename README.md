@@ -1,5 +1,37 @@
 # MET_IV
 
+# List of Classifiers
+- Logit (David)
+- Lasso (David)
+- Ridge (David)
+- Random Forest (Evan)
+- Boosted Trees (Evan)
+- Support Vector Machines (David)
+
+# Evlauation of Results
+- Confusion Matrix
+- Performance Metrics (Accuracy, Precision, Recall, F1)
+
+# Deliverable
+- Report
+- Replication Package
+
+# Schedule
+- Re-convene at Tuesday the 27th and decide on a model
+
+# Notes
+- NA values will be imputed using KNN Imputing (nearest Neighbour matching)
+
+
+
+
+
+
+
+
+
+
+
 # Bomboclat
 Bomboclat comes from Jamaican English. The term has been recorded since the 1950s but likely was in use before then. It is based on bumbo, a coarse patois term for female genitalia, and claat, a Jamaican type of cloth. Combined, the words literally mean “menstrual cloth,” but early evidence for bomboclat suggests it has denigrated someone or something as “contemptible” from or close to the start. 
 
