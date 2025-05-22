@@ -9,6 +9,7 @@
 library(tidyverse)
 library(tidymodels)
 library(caret)
+library(cluster)
 
 # Clear Global Environment
 rm(list=ls())
@@ -26,9 +27,25 @@ rm(train)
 na_count <- sapply(data, function(y) sum(length(which(is.na(y)))))
 na_count[na_count > 0]
 
-## NA Values seem to be in Columns "age" and "sex"
-# Removing NA values (gets rid of 336 observations)
-data <- na.omit(data)
+# Create backup for comparing dropping NAs and imputing NAs
+data_dropped_na <-  na.omit(data)
+
+
+
+
+# Median imputation for 'age'
+median_age <- median(data$age, na.rm = TRUE)
+data$age[is.na(data$age)] <- median_age
+
+# Mode function for factors
+get_mode <- function(x) {
+  ux <- unique(x[!is.na(x)])
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+# Mode imputation for 'q1002'
+mode_q1002 <- get_mode(data$q1002)
+data$q1002[is.na(data$q1002)] <- mode_q1002
 
 #################################################################################
 
@@ -75,12 +92,13 @@ prop.table(table(test$emig))
 
 # Create backup data file
 backup <-  data
+backup_dropped_na <- data_dropped_na
 
 # # Load evaluation data (Used for evaluating the model at the very end)
 # eval <- load("final_project/AB4x_eval_mock.Rdata")
 
 # Clear global environment except for "train", "test", "backup" and "eval"
-rm(list=ls()[!ls() %in% c("train", "test", "backup", "eval")])
+rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval")])
 
 
 ### COMMENCE PREDICTION #####################################################################################
