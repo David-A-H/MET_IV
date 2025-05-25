@@ -52,7 +52,7 @@ data$q1002[is.na(data$q1002)] <- mode_q1002
 # Convert emig to factor
 data$emig <- as.factor(ifelse(data$emig == "Yes", 1, 0))  # Convert to binary factor (1 = emigration, 0 = no emigration)
 
-#################################################################################
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # Overall Summary
 summary(data)
@@ -70,7 +70,7 @@ summary(data)
 
 # NOTE: Renaming code works. However, the recoding file "var_rename.csv" is not entirely correct because it was created by AI. If worth the effort, maybe re-check. Otherwise proceed without renaming variables
   
-#################################################################################
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # Check for class imbalance
 table(data$emig)
@@ -83,7 +83,7 @@ hist(as.numeric(data$edu_combined))
 
 # NOTE: Might want to think about rescaling some values like age. Slight skewness towards younger respondents
 
-#################################################################################
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # Split Data into Train and Test and Stratify for emig
 set.seed(123)
@@ -111,23 +111,34 @@ rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval"
 ### COMMENCE PREDICTION #####################################################################################
 # Logistic Regression on all features as a baseline
 
+
+
+
+
+
+
+
 set.seed(123)
 
-
-# Define the formula for the model
-formula <- emig ~ .
+# Define a recipe to handle preprocessing
+logistic_recipe <- recipe(emig ~ ., data = train) %>%
+  step_naomit(all_predictors(), all_outcomes()) %>%   # Remove NAs
+  step_nzv(all_predictors()) %>%                      # Remove near-zero variance predictors
+  step_unknown(all_nominal_predictors()) %>%          # Handle unseen levels in test data
+  step_other(all_nominal_predictors(), threshold = 0.01) %>%  # Combine infrequent levels
+  step_dummy(all_nominal_predictors())                # Convert factors to dummies
 
 # Define the logistic regression model
 logistic_model <- logistic_reg() %>%
   set_engine("glm") %>%
-  set_mode("classification")  # Set to classification mode
+  set_mode("classification")
 
-# Create the workflow and add the model and formula
+# Create the workflow
 logistic_wf <- workflow() %>%
   add_model(logistic_model) %>%
-  add_formula(formula)
+  add_recipe(logistic_recipe)
 
-# Fit the model to the training data
+# Fit the model to training data
 logistic_fit <- logistic_wf %>%
   fit(data = train)
 
@@ -135,22 +146,24 @@ logistic_fit <- logistic_wf %>%
 logistic_pred      <- predict(logistic_fit, new_data = test, type = "class")
 logistic_pred_prob <- predict(logistic_fit, new_data = test, type = "prob")
 
-# Evaluate model performance using a confusion matrix
-logistic_result <- confusionMatrix(logistic_pred$.pred_class, test$emig, positive = "1")
-logistic_result
+# Evaluate with confusion matrix
+logistic_result <- confusionMatrix(
+  data = logistic_pred$.pred_class,
+  reference = test$emig,
+  positive = "1"
+)
+print(logistic_result)
 
-
-# VISUALISATION
-# Combine predicted probabilities with true labels
+# Combine predictions with actuals for ROC analysis
 logistic_results <- bind_cols(test, logistic_pred_prob) %>%
   mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure positive class is first
 
-# Calculate ROC and AUC
+# ROC and AUC
 roc_data <- roc_curve(logistic_results, truth = emig, .pred_1)
 auc_value <- roc_auc(logistic_results, truth = emig, .pred_1)
 print(auc_value)
 
-# Plot ROC curve
+# ROC Curve
 ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity)) +
   geom_line(color = "blue", size = 1.2) +
   geom_abline(linetype = "dashed", color = "gray") +
@@ -163,68 +176,79 @@ ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity)) +
 
 
 
-
-
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # LASSO REGRESSION
 set.seed(123)
 
+# Define recipe
+lasso_recipe <- recipe(emig ~ ., data = train) %>%
+  step_naomit(all_predictors(), all_outcomes()) %>%
+  step_nzv(all_predictors()) %>%
+  step_unknown(all_nominal_predictors()) %>%
+  step_other(all_nominal_predictors(), threshold = 0.01) %>%
+  step_dummy(all_nominal_predictors())
 
-# create x_train, x_test, y_train, y_test from train and test dataset
-x_train <- model.matrix(emig ~ ., data = train)[, -1]  # Remove intercept
-x_test <- model.matrix(emig ~ ., data = test)[, -1]  # Remove intercept
-y_train <- train$emig
-y_test <- test$emig
+# Define Lasso model (glmnet with alpha = 1)
+lasso_model <- logistic_reg(
+  penalty = tune(),       # We'll tune lambda
+  mixture = 1             # 1 = Lasso (L1)
+) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
 
+# Create workflow
+lasso_wf <- workflow() %>%
+  add_model(lasso_model) %>%
+  add_recipe(lasso_recipe)
 
-# Perform cross-validated lasso logistic regression
-cv.lasso <- cv.glmnet(x_train, y_train, alpha = 1, family = "binomial")
+# Cross-validation setup
+cv_folds <- vfold_cv(train, v = 5, strata = emig)
 
-# Plot the cross-validation curve
-plot(cv.lasso)
-
-# Get Lambda 1SE to select a more interpretable model
-best_lambda <- cv.lasso$lambda.min
-best_lambda
-
-
-# Fit the final model
-lasso_model <- glmnet(x_train, y_train, alpha = 1, family = "binomial", lambda = best_lambda)
-
-# Extract coefficients
-coef(lasso_model)
-
-# See which variables are selected (non-zero coefficients)
-lasso_coefs <- coef(lasso_model)
-selected_variables <- rownames(lasso_coefs)[lasso_coefs[,1] != 0]
-selected_variables
-
-
-# Predict on test set
-predictions_prob <- predict(lasso_model, newx = x_test, type = "response")
-predictions_class <- ifelse(predictions_prob > 0.5, 1, 0)
-
-# Confusion matrix
-lasso_result <-  confusionMatrix(as.factor(predictions_class), y_test, positive = "1")
-lasso_result
-
-
-# VISUALISATION
-# Ensure labels are factors in the correct order
-y_test_factor <- factor(y_test, levels = c("1", "0"))
-
-# Convert predictions to data frame and bind with true labels
-lasso_results <- data.frame(
-  truth = y_test_factor,
-  .pred_1 = as.vector(predictions_prob)
+# Tune penalty parameter (lambda)
+lasso_res <- tune_grid(
+  lasso_wf,
+  resamples = cv_folds,
+  grid = 30,
+  metrics = metric_set(roc_auc)
 )
 
-# Calculate ROC curve
-lasso_roc_data <- roc_curve(lasso_results, truth = truth, .pred_1)
-lasso_auc_value <- roc_auc(lasso_results, truth = truth, .pred_1)
+# Get best lambda (penalty) based on AUC
+best_lasso <- select_best(lasso_res, metric = "roc_auc")
+best_lasso
+
+# Finalize workflow with best penalty
+final_lasso_wf <- finalize_workflow(lasso_wf, best_lasso)
+
+# Fit to training data
+final_lasso_fit <- fit(final_lasso_wf, data = train)
+
+# Predict on test set
+#lasso_pred_class <- predict(final_lasso_fit, new_data = test, type = "class")
+lasso_pred_prob  <- predict(final_lasso_fit, new_data = test, type = "prob")
+
+# Attempt to improve performance by modifying classification threshold
+threshold <- 0.25
+lasso_pred_class <- ifelse(lasso_pred_prob$.pred_1 > threshold, "1", "0") %>%
+  factor(levels = c("0", "1"))
+
+# Confusion matrix
+lasso_result <- confusionMatrix(
+  data = lasso_pred_class,
+  reference = test$emig,
+  positive = "1"
+)
+print(lasso_result)
+
+# Prepare data for ROC
+lasso_results <- bind_cols(test, lasso_pred_prob) %>%
+  mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure correct order
+
+# ROC and AUC
+lasso_roc_data <- roc_curve(lasso_results, truth = emig, .pred_1)
+lasso_auc_value <- roc_auc(lasso_results, truth = emig, .pred_1)
 print(lasso_auc_value)
 
-# Plot ROC curve
+# Plot ROC Curve
 ggplot(lasso_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
   geom_line(color = "blue", size = 1.2) +
   geom_abline(linetype = "dashed", color = "gray") +
@@ -238,71 +262,84 @@ ggplot(lasso_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
 
 
 
-
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # RIDGE REGRESSION
 set.seed(123)
 
-# create x_train, x_test, y_train, y_test from train and test dataset
-x_train <- model.matrix(emig ~ ., data = train)[, -1]  # Remove intercept
-x_test <- model.matrix(emig ~ ., data = test)[, -1]  # Remove intercept
-y_train <- train$emig
-y_test <- test$emig
+# Define recipe
+ridge_recipe <- recipe(emig ~ ., data = train) %>%
+  step_naomit(all_predictors(), all_outcomes()) %>%
+  step_nzv(all_predictors()) %>%
+  step_unknown(all_nominal_predictors()) %>%
+  step_other(all_nominal_predictors(), threshold = 0.01) %>%
+  step_dummy(all_nominal_predictors())
 
+# Define ridge model (glmnet with alpha = 1)
+ridge_model <- logistic_reg(
+  penalty = tune(),       # We'll tune lambda
+  mixture = 0             
+) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
 
-# Perform cross-validated lasso logistic regression
-cv.lasso <- cv.glmnet(x_train, y_train, alpha = 0, family = "binomial")
+# Create workflow
+ridge_wf <- workflow() %>%
+  add_model(ridge_model) %>%
+  add_recipe(ridge_recipe)
 
-# Plot the cross-validation curve
-plot(cv.lasso)
+# Cross-validation setup
+cv_folds <- vfold_cv(train, v = 5, strata = emig)
 
-# Get Lambda 1SE to select a more interpretable model
-best_lambda <- cv.lasso$lambda.min
-best_lambda
-
-
-# Fit the final model
-lasso_model <- glmnet(x_train, y_train, alpha = 0, family = "binomial", lambda = best_lambda)
-
-# Extract coefficients
-coef(lasso_model)
-
-# See which variables are selected (non-zero coefficients)
-lasso_coefs <- coef(lasso_model)
-selected_variables <- rownames(lasso_coefs)[lasso_coefs[,1] != 0]
-selected_variables
-
-
-# Predict on test set
-predictions_prob <- predict(lasso_model, newx = x_test, type = "response")
-predictions_class <- ifelse(predictions_prob > 0.5, 1, 0)
-
-# Confusion matrix
-lasso_result <-  confusionMatrix(as.factor(predictions_class), y_test, positive = "1")
-lasso_result
-
-
-# VISUALISATION
-# Ensure labels are factors in the correct order
-y_test_factor <- factor(y_test, levels = c("1", "0"))
-
-# Convert predictions to data frame and bind with true labels
-lasso_results <- data.frame(
-  truth = y_test_factor,
-  .pred_1 = as.vector(predictions_prob)
+# Tune penalty parameter (lambda)
+ridge_res <- tune_grid(
+  ridge_wf,
+  resamples = cv_folds,
+  grid = 30,
+  metrics = metric_set(roc_auc)
 )
 
-# Calculate ROC curve
-lasso_roc_data <- roc_curve(lasso_results, truth = truth, .pred_1)
-lasso_auc_value <- roc_auc(lasso_results, truth = truth, .pred_1)
-print(lasso_auc_value)
+# Get best lambda (penalty) based on AUC
+best_ridge <- select_best(ridge_res, metric = "roc_auc")
+best_ridge
 
-# Plot ROC curve
-ggplot(lasso_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
+# Finalize workflow with best penalty
+final_ridge_wf <- finalize_workflow(ridge_wf, best_ridge)
+
+# Fit to training data
+final_ridge_fit <- fit(final_ridge_wf, data = train)
+
+# Predict on test set
+#ridge_pred_class <- predict(final_ridge_fit, new_data = test, type = "class")
+ridge_pred_prob  <- predict(final_ridge_fit, new_data = test, type = "prob")
+
+# Attempt to improve performance by modifying classification threshold
+threshold <- 0.25
+ridge_pred_class <- ifelse(ridge_pred_prob$.pred_1 > threshold, "1", "0") %>%
+  factor(levels = c("0", "1"))
+
+# Confusion matrix
+ridge_result <- confusionMatrix(
+  data = ridge_pred_class,
+  reference = test$emig,
+  positive = "1"
+)
+print(ridge_result)
+
+# Prepare data for ROC
+ridge_results <- bind_cols(test, ridge_pred_prob) %>%
+  mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure correct order
+
+# ROC and AUC
+ridge_roc_data <- roc_curve(ridge_results, truth = emig, .pred_1)
+ridge_auc_value <- roc_auc(ridge_results, truth = emig, .pred_1)
+print(ridge_auc_value)
+
+# Plot ROC Curve
+ggplot(ridge_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
   geom_line(color = "blue", size = 1.2) +
   geom_abline(linetype = "dashed", color = "gray") +
   labs(
-    title = "ROC Curve - Lasso Logistic Regression",
+    title = "ROC Curve - ridge Logistic Regression",
     x = "1 - Specificity (False Positive Rate)",
     y = "Sensitivity (True Positive Rate)"
   ) +
