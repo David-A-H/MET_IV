@@ -33,7 +33,6 @@ data_dropped_na <-  na.omit(data)
 
 
 
-
 # Median imputation for 'age'
 median_age <- median(data$age, na.rm = TRUE)
 data$age[is.na(data$age)] <- median_age
@@ -103,71 +102,40 @@ rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval"
 
 
 ### COMMENCE PREDICTION #####################################################################################
-# NOTE: BEFORE EVERY PREDICTION MODEL, RUN set.seed(123) to reset the RNG.
+
+# Set seed for reproducibility
 set.seed(123)
 
-
-# Create a 10-fold cross-validation split
+# Create a 10-fold cross-validation split on the training dataset
 folds <- vfold_cv(train, v = 10)
 
-# Set up a recipe
+# Set up a recipe for preprocessing
+# The model will predict 'emig' using all other variables in 'train'
 svm_recipe <- recipe(emig ~ ., data = train)
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-# Define models
-svm_linear_spec <- svm_linear(mode = "classification") %>% 
-  set_engine("kernlab")
-
-svm_poly_spec <- svm_poly(mode = "classification") %>%
-  set_engine("kernlab")
-
+# Specify a Support Vector Machine model with a radial basis function (RBF) kernel
+# Set the engine to 'kernlab', which is used for fitting the model
 svm_rbf_spec <- svm_rbf(mode = "classification") %>%
   set_engine("kernlab")
 
-
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-# Wrap each into a workflow
-wf_linear <- workflow() %>%
-  add_model(svm_linear_spec) %>%
-  add_recipe(svm_recipe)
-
-wf_poly <- workflow() %>%
-  add_model(svm_poly_spec) %>%
-  add_recipe(svm_recipe)
-
+# Create a modeling workflow
+# Add the SVM model specification and the preprocessing recipe
 wf_rbf <- workflow() %>%
   add_model(svm_rbf_spec) %>%
   add_recipe(svm_recipe)
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Define wanted performance metrics
+# Define a set of performance metrics to evaluate the model
+# Includes accuracy, precision, recall, and F1 score (f_meas)
 my_metrics <- metric_set(
   accuracy,
   yardstick::precision,
   yardstick::recall,
-  f_meas,
-  roc_auc
+  f_meas
 )
 
-
-# Evaluate each with cross-validation
-res_linear <- fit_resamples(
-  wf_linear, 
-  resamples = folds, 
-  metrics = my_metrics,
-  control = control_resamples(save_pred = TRUE)
-)
-
-res_poly <- fit_resamples(
-  wf_poly, 
-  resamples = folds, 
-  metrics = my_metrics,
-  control = control_resamples(save_pred = TRUE)
-)
-
+# Perform cross-validated resampling
+# Fit the model on each fold and evaluate using the specified metrics
+# Save predictions for each resample
 res_rbf <- fit_resamples(
   wf_rbf, 
   resamples = folds, 
@@ -176,93 +144,113 @@ res_rbf <- fit_resamples(
 )
 
 
-
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# FIT ON THE TEST DATA
 
-# Compare results
-collect_metrics(res_linear)
-collect_metrics(res_poly)
-collect_metrics(res_rbf)
+# Fit the final model on the full training data
+final_rbf_fit <- fit(wf_rbf, data = train)
 
+# Set a custom cutoff threshold (for some reason, the default value was 0.75 earlier)
+custom_cutoff <- 0.5
 
+# Get predictions with class probabilities
+test_preds <- predict(final_rbf_fit, new_data = test, type = "prob") %>%
+  bind_cols(test)
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Calculate and display ROC curve and AUC value
+# Create predicted class based on custom cutoff
+test_preds <- test_preds %>%
+  mutate(.pred_class_custom = if_else(.pred_Yes >= custom_cutoff, "Yes", "No"),
+         .pred_class_custom = factor(.pred_class_custom, levels = levels(as.factor(emig))),
+         emig = as.factor(emig))
 
-# Get ROC data for each model
-get_roc_data <- function(results, model_name) {
-  collect_predictions(results, summarize = FALSE) %>%
-    roc_curve(truth = emig, .pred_1) %>%  # assuming "1" is the positive class
-    mutate(Model = model_name)
-}
-
-roc_linear <- get_roc_data(res_linear, "Linear")
-roc_poly <- get_roc_data(res_poly, "Polynomial")
-roc_rbf <- get_roc_data(res_rbf, "RBF")
-
-# Combine and plot
-roc_data <- bind_rows(roc_linear, roc_poly, roc_rbf)
-
-ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity, color = Model)) +
-  geom_path(size = 1.2) +
-  geom_abline(lty = 2, color = "gray") +
-  coord_equal() +
-  labs(title = "ROC Curve", x = "1 - Specificity", y = "Sensitivity")
+# Make sure Yes Class is correctly specified
+test_preds <- test_preds %>%
+  mutate(
+    emig = factor(emig, levels = c("Yes", "No")),
+    .pred_class_custom = factor(.pred_class_custom, levels = c("Yes", "No"))
+  )
 
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Compute confusion matrix using the custom predictions
+conf_mat(data = test_preds, 
+         truth = emig, 
+         estimate = .pred_class_custom)
 
 
-# Calculate AUC for each model
-get_auc <- function(results) {
-  collect_predictions(results, summarize = FALSE) %>%
-    roc_auc(truth = emig, .pred_1)
-}
+# Ensure variables are factors with correct levels
+test_preds <- test_preds %>%
+  mutate(emig = as.factor(emig),
+         .pred_class_custom = factor(.pred_class_custom, levels = levels(emig)))
 
-auc_linear <- get_auc(res_linear)
-auc_poly <- get_auc(res_poly)
-auc_rbf <- get_auc(res_rbf)
+# Apply metrics
+my_metrics(data = test_preds,
+               truth = emig,
+               estimate = .pred_class_custom)
 
-bind_rows(
-  Linear = auc_linear,
-  Polynomial = auc_poly,
-  RBF = auc_rbf,
-  .id = "Model"
-)
+# ROC AUC requires class probabilities
+roc_auc(data = test_preds,
+        truth = emig,
+        .pred_Yes)
 
-
-# Current Results:
-# > collect_metrics(res_linear)
-# # A tibble: 5 × 6
-# .metric   .estimator  mean     n std_err .config             
-# <chr>     <chr>      <dbl> <int>   <dbl> <chr>               
-#   1 accuracy  binary     0.716    10 0.00536 Preprocessor1_Model1
-# 2 f_meas    binary     0.818    10 0.00382 Preprocessor1_Model1
-# 3 precision binary     0.790    10 0.00822 Preprocessor1_Model1
-# 4 recall    binary     0.848    10 0.00667 Preprocessor1_Model1
-# 5 roc_auc   binary     0.657    10 0.00739 Preprocessor1_Model1
-
-# > collect_metrics(res_poly)
-# # A tibble: 5 × 6
-# .metric   .estimator  mean     n std_err .config             
-# <chr>     <chr>      <dbl> <int>   <dbl> <chr>               
-#   1 accuracy  binary     0.716    10 0.00538 Preprocessor1_Model1
-# 2 f_meas    binary     0.818    10 0.00382 Preprocessor1_Model1
-# 3 precision binary     0.790    10 0.00823 Preprocessor1_Model1
-# 4 recall    binary     0.848    10 0.00666 Preprocessor1_Model1
-# 5 roc_auc   binary     0.657    10 0.00739 Preprocessor1_Model1
-
-# > collect_metrics(res_rbf)
-# # A tibble: 5 × 6
-# .metric   .estimator  mean     n  std_err .config             
-# <chr>     <chr>      <dbl> <int>    <dbl> <chr>               
-#   1 accuracy  binary     0.752    10 0.00567  Preprocessor1_Model1
-# 2 f_meas    binary     0.858    10 0.00367  Preprocessor1_Model1
-# 3 precision binary     0.752    10 0.00572  Preprocessor1_Model1
-# 4 recall    binary     0.999    10 0.000376 Preprocessor1_Model1
-# 5 roc_auc   binary     0.711    10 0.00707  Preprocessor1_Model1
-# > 
-
+########
+# 
+# 
+# collect_metrics(res_rbf)
+# 
+# # collect confusion matrix from res_rbf
+# confusion_rbf <- collect_predictions(res_rbf) %>%
+#   conf_mat(truth = emig, estimate = .pred_class)
+# # Display confusion matrix
+# confusion_rbf
+# 
+# 
+# 
+# 
+# ##############
+# 
+# #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# # Calculate and display ROC curve and AUC value
+# 
+# # Get ROC data for each model
+# get_roc_data <- function(results, model_name) {
+#   collect_predictions(results, summarize = FALSE) %>%
+#     roc_curve(truth = emig, .pred_1) %>%  # assuming "1" is the positive class
+#     mutate(Model = model_name)
+# }
+# 
+# roc_linear <- get_roc_data(res_linear, "Linear")
+# roc_poly <- get_roc_data(res_poly, "Polynomial")
+# roc_rbf <- get_roc_data(res_rbf, "RBF")
+# 
+# # Combine and plot
+# roc_data <- bind_rows(roc_linear, roc_poly, roc_rbf)
+# 
+# ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity, color = Model)) +
+#   geom_path(size = 1.2) +
+#   geom_abline(lty = 2, color = "gray") +
+#   coord_equal() +
+#   labs(title = "ROC Curve", x = "1 - Specificity", y = "Sensitivity")
+# 
+# 
+# #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# 
+# 
+# # Calculate AUC for each model
+# get_auc <- function(results) {
+#   collect_predictions(results, summarize = FALSE) %>%
+#     roc_auc(truth = emig, .pred_1)
+# }
+# 
+# auc_linear <- get_auc(res_linear)
+# auc_poly <- get_auc(res_poly)
+# auc_rbf <- get_auc(res_rbf)
+# 
+# bind_rows(
+#   Linear = auc_linear,
+#   Polynomial = auc_poly,
+#   RBF = auc_rbf,
+#   .id = "Model"
+# )
 
 
 

@@ -353,6 +353,17 @@ ggplot(ridge_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
 ### COMMENCE MODEL COMPARISON AND EXTRACTION #################################################################
 
 
+# Compare models based on AUC
+model_comparison <- tibble(
+  Model = c("Logistic Regression", "Lasso Regression", "Ridge Regression"),
+  AUC = c(auc_value$.estimate, lasso_auc_value$.estimate, ridge_auc_value$.estimate)
+)
+print(model_comparison)
 
 
 
+# Results of this
+# Model                 AUC
+# 1 Logistic Regression 0.677
+# 2 Lasso Regression    0.727
+# 3 Ridge Regression    0.715
