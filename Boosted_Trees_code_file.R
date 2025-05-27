@@ -6,12 +6,14 @@
 
 # Load Packages
 ## Import Packages here:
-library(tidyverse)
 library(tidymodels)
+library(themis)        # for sampling steps
+library(recipes)       # for pre-processing
+library(dplyr)
+library(doFuture)
+library(mice)   
+library(tidyverse)
 library(caret)
-library(cluster)
-library(VIM)
-library(themis)
 
 # Clear Global Environment
 rm(list=ls())
@@ -21,7 +23,7 @@ data <-  load("final_project/AB4x_train.Rdata")
 data <-  train
 rm(train)
 
-
+table(data$emig)
 
 ### COMMENCE PRE-PROCESSING #################################################################################
 
@@ -34,20 +36,35 @@ data_dropped_na <-  na.omit(data)
 
 
 # Median imputation for 'age'
-median_age <- median(data$age, na.rm = TRUE)
-data$age[is.na(data$age)] <- median_age
+#median_age <- median(data$age, na.rm = TRUE)
+#data$age[is.na(data$age)] <- median_age
 
 # Mode function for factors
-get_mode <- function(x) {
-  ux <- unique(x[!is.na(x)])
-  ux[which.max(tabulate(match(x, ux)))]
-}
+#get_mode <- function(x) {
+ # ux <- unique(x[!is.na(x)])
+ # ux[which.max(tabulate(match(x, ux)))]
+#}
 
 # Mode imputation for 'q1002'
-mode_q1002 <- get_mode(data$q1002)
-data$q1002[is.na(data$q1002)] <- mode_q1002
+#mode_q1002 <- get_mode(data$q1002)
+#data$q1002[is.na(data$q1002)] <- mode_q1002
 
 
+# MICE to fill 'age' and 'q1002' simultaneously
+# Use 5 imputations, then pool later
+
+mice_init <- mice(data %>% select(age, q1002),
+                  m = 5, # creates 5 different imputed datasets (i.e., 5 multiple imputations).
+                  method = c(age = "pmm", q1002 = "polyreg"), #Uses Predictive Mean Matching to impute age (numeric) /Uses polytomous logistic regression to impute
+                  seed = 123,
+                  parallel = "multicore",
+                  ncore = parallel::detectCores()-1)
+# Extract one complete dataset (first imputed dataset of the 5 generated).
+data_imp <- complete(mice_init, action = 1)
+# Replace into original
+data <- data %>%
+  select(-age, -q1002) %>%
+  bind_cols(data_imp)
 
 
 #################################################################################
@@ -90,11 +107,11 @@ hist(as.numeric(data$edu_combined))
 
 #################################################################################
 
-# Split Data into Train and Test and Stratify for emig
 
+# Factorization of emig
 data$emig <- factor(data$emig, levels = c("No", "Yes"))
 
-
+# Split Data into Train and Test and Stratify for emig
 set.seed(123)
 train_index <- createDataPartition(data$emig, p = .8, list = FALSE)
 train <- data[train_index, ]
@@ -112,15 +129,7 @@ backup_dropped_na <- data_dropped_na
 # eval <- load("final_project/AB4x_eval_mock.Rdata")
 
 # Clear global environment except for "train", "test", "backup" and "eval"
-rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval")])
-
-
-train_imp <- kNN(train,
-                 variable = c("age", "q1002"),
-                 k        = 5,
-                 weightDist = TRUE,
-                 dist_var   = setdiff(names(train), c("age","q1002")),
-                 imp_var    = FALSE)
+# rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval")])
 
 
 
@@ -129,44 +138,47 @@ um_vars <- names(train)[vapply(train, is.numeric, logical(1))]
 ### COMMENCE PREDICTION #####################################################################################
 # NOTE: BEFORE EVERY PREDICTION MODEL, RUN set.seed(123) to reset the RNG.
 
-library(doFuture)
-
-
-plan(multisession, workers = parallel::detectCores() - 1)
-registerDoFuture()
 
 set.seed(123)
 folds <- vfold_cv(train, v = 10)
 
-knn_rec <- recipe(emig ~ ., data = train) %>%
-  step_novel(all_nominal_predictors(), new_level = "__new__") %>%
-  step_impute_knn(all_predictors(), neighbors = 5) %>%
-  step_nzv(all_predictors()) %>% 
-  step_corr(all_numeric(), threshold = 0.9) %>%
-  step_dummy(all_nominal_predictors()) %>% 
-  step_zv() %>% 
-  step_smote(all_outcomes(), over_ratio = 1) %>%
-  step_normalize(all_numeric_predictors())
-
-knn_rec <- recipe(emig ~ ., data = train) %>%
-  step_novel(all_nominal_predictors(), new_level = "__new__") %>%
-  step_nzv(all_predictors()) %>% 
-  step_dummy(all_nominal_predictors()) %>% 
-  step_zv() %>% 
-  step_smote(all_outcomes(), over_ratio = 1) %>%
+rec <- recipe(emig ~ ., data = train) %>%
+  step_novel(all_nominal_predictors()) %>% # handle novel (or unseen) factor levels in categorical variables. 
+  step_zv(all_predictors()) %>% #  removes any predictors that have zero variance
+  step_dummy(all_nominal_predictors()) %>%
+ # This step performs oversampling (up-sampling) of the minority class in the target variable emig. 
+  # It balances the classes by duplicating instances from the minority class to match the size of the majority class.
+  # The ratio of the minority class to the majority class is set to 1, 
+  #meaning the minority class will be upsampled until it has the same number of instances as the majority class.
+ step_upsample(emig, over_ratio = 1) %>% 
+  step_downsample(emig, under_ratio = 1) %>%
   step_normalize(all_numeric_predictors())
 
 
-xgb_model <- boost_tree(
-  trees = tune(),         
-  tree_depth = tune(),    
-  learn_rate = tune()     
+xgb_spec <- expand_grid(
+  trees = c(200, 500, 800),
+  tree_depth = c(2, 3, 4),
+  learn_rate = c(0.005, 0.01, 0.015)
+)
+
+xgb_spec <- boost_tree(
+  trees = tune(),
+  tree_depth = tune(),
+  learn_rate = tune(),
+  mtry = tune(),               # number of predictors randomly sampled
+  min_n = tune(),              # min node size
+  loss_reduction = tune(),     # gamma
+  sample_size = tune(),        # subsample
+  stop_iter = 10               # early stopping rounds
 ) %>%
-  set_engine("xgboost") %>%
+  set_engine("xgboost",
+             objective = "binary:logistic",
+             scale_pos_weight = tune()  # handle imbalance in tree
+  ) %>%
   set_mode("classification")
 
 
-xgb_model2 <- boost_tree(
+xgb_spec <- boost_tree(
   trees = tune(),
   tree_depth = tune(),
   learn_rate = tune()
@@ -175,103 +187,84 @@ xgb_model2 <- boost_tree(
   ) %>%
   set_mode("classification")
 
-xgb_grid <- expand_grid(
+#xgb_grid <- expand_grid(
+  #trees = c(200, 500, 800),
+  #tree_depth = c(2, 3, 4),
+ # learn_rate = c(0.005, 0.01, 0.015)
+#)
+
+#xgb_grid2 <- expand_grid(
+  #tree_depth = c(2, 3, 4),
+ # trees = c(200, 500, 800),
+ # learn_rate = c(0.005, 0.01, 0.015),
+ # subsample           = c(0.5, 0.8, 1.0),
+ # colsample_bytree    = c(0.5, 0.8, 1.0),
+ # min_child_weight    = c(1, 5, 10),
+ # gamma               = c(0, 1, 5),
+ # size                = 30
+#)
+
+sample_prop <- sample_prop(range = c(0.5, 1)) %>% finalize(train)
+
+
+
+
+xgb_grid<- expand_grid(
   trees = c(200, 500, 800),
   tree_depth = c(2, 3, 4),
   learn_rate = c(0.005, 0.01, 0.015)
 )
 
-xgb_grid2 <- expand_grid(
-  trees = c(200, 500, 800),
-  tree_depth = c(2, 3, 4),
-  learn_rate = c(0.005, 0.01, 0.015),
-  subsample           = c(0.5, 0.8, 1.0),
-  colsample_bytree    = c(0.5, 0.8, 1.0),
-  min_child_weight    = c(1, 5, 10),
-  gamma               = c(0, 1, 5),
-  size                = 30
+xgb_grid <- grid_latin_hypercube(
+  trees(), tree_depth(), learn_rate(), mtry(range = c(5, 20)),
+  min_n(), loss_reduction(), sample_prop, scale_pos_weight(range = c(1, 4)),
+  size = 30
 )
 
-xgb_wf <- workflow() %>%
+wf <- workflow() %>%
   add_recipe(rec) %>%
-  add_model(xgb_model)
-
-xgb_wf2 <- workflow() %>%
-  add_recipe(knn_rec) %>%
-  add_model(xgb_model2)
+  add_model(xgb_spec)
 
 
+plan(multisession, workers = parallel::detectCores() - 1)
+registerDoFuture()
 
-xgb_tuned <- xgb_wf %>%
-  tune_grid(
-    resamples = folds,
-    grid = xgb_grid,
-    metrics = metric_set(roc_auc, accuracy, f_meas),
-    control   = control_grid(
-      verbose      = FALSE,
-      save_pred    = TRUE
-      # with future, parallelism is automatic under the hood
-    )
+set.seed(123)
+tune_res <- tune_grid(
+  wf,
+  resamples = folds,
+  grid = xgb_grid,
+  metrics = metric_set(roc_auc, pr_auc, accuracy, f_meas),
+  control   = control_grid(
+    verbose      = FALSE,
+    save_pred    = TRUE
+    # with future, parallelism is automatic under the hood
   )
-
-
-xgb_tuned2 <- xgb_wf2 %>%
-  tune_grid(
-    resamples = folds,
-    grid = xgb_grid,
-    metrics = metric_set(roc_auc, accuracy, f_meas),
-    control   = control_grid(
-      verbose      = FALSE,
-      save_pred    = TRUE
-      # with future, parallelism is automatic under the hood
-    )
-  )
-
+)
 
 plan(sequential)
 
 
-xgb_tuned %>% 
+tune_res %>% 
   show_best(metric= "roc_auc", n = 10)
-xgb_tuned %>% 
+tune_res %>% 
   show_best(metric= "accuracy", n = 10)
-xgb_tuned %>% 
+tune_res %>% 
   show_best(metric= "f_meas", n = 10)
+tune_res %>% 
+  show_best(metric= "pr_auc", n = 10)
 
-
-xgb_tuned2 %>% 
-  show_best(metric= "roc_auc", n = 10)
-xgb_tuned2 %>% 
-  show_best(metric= "accuracy", n = 10)
-xgb_tuned2 %>% 
-  show_best(metric= "f_meas", n = 10)
-
-
-xgb_best_roc <- xgb_tuned %>% 
-  select_best(metric= "roc_auc")
-xgb_best_a<- xgb_tuned %>% 
-  select_best(metric= "accuracy")
-xgb_best<- xgb_tuned %>% 
-  select_best(metric= "f_meas")
-
-xgb_best_roc <- xgb_tuned2 %>% 
-  select_best(metric= "f_meas")
-
+best <- tune_res %>% 
+  select_best(metric= "pr_auc")
 
 #–– 10. Finalize workflow and fit on full training set
-final_wf_xg <- finalize_workflow(xgb_wf, xgb_best)
-final_wf_xg2 <- finalize_workflow(xgb_wf2, xgb_best_roc)
-
-final_fit_xg <- final_wf_xg %>%
+final_wf <- finalize_workflow(wf, best)
+final_fit <- final_wf %>%
   fit(data = train)
 
-final_fit_xg2 <- final_wf_xg2 %>%
-  fit(data = train)
 
-final_fit_xg <- final_wf_xg %>%
-  fit(data = train)
 
-er <- xgb_tuned2 %>% 
+er <- tune_res %>% 
   collect_predictions()
 
 roc_data <- er %>%
@@ -288,8 +281,8 @@ th_equal <- roc_data %>%
 
 
 #–– 11. Evaluate on your held-out future test set
-preds_x <- predict(final_fit_xg, test, type = "prob") %>%
-  bind_cols(predict(final_fit_xg, test)) %>%
+preds_x <- predict(final_fit, test, type = "prob") %>%
+  bind_cols(predict(final_fit, test)) %>%
   bind_cols(test %>% select(emig))
 
 preds2 <- predict(final_fit_xg2, new_data = test, type = "prob") %>% 
@@ -300,14 +293,13 @@ preds2 <- predict(final_fit_xg2, test, type = "prob") %>%
   bind_cols(test %>% select(emig)) 
 
 
-
 preds_xg <- preds_x %>%
   mutate(
     emig = factor(emig, levels = c("No", "Yes")),         # truth
     .pred_class = factor(.pred_class, levels = c("No", "Yes"))  # estimate
   )
 
-preds2x <- preds2 %>%
+preds_xg  <- preds_x %>%
   mutate(
     emig = factor(emig, levels = c("No", "Yes")),  
     .pred_class = if_else(.pred_Yes >= th_equal, "Yes", "No"),# truth
@@ -322,7 +314,7 @@ preds2$.pred_class <- factor(preds2$.pred_class)
 cm <- conf_mat(preds_xg, truth = emig, estimate = .pred_class, 
                mode = "everything") 
 
-cm2 <- conf_mat(preds2x, truth = emig, estimate = .pred_class, 
+cm2 <- conf_mat(preds_xg, truth = emig, estimate = .pred_class, 
                mode = "everything") 
 
 cm3 <- conf_mat(preds2x, truth = emig, estimate = .pred_class, 
