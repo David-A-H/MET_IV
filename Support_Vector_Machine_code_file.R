@@ -11,6 +11,7 @@ library(tidymodels)
 library(caret)
 library(cluster)
 library(yardstick)
+library(mice)
 
 # Clear Global Environment
 rm(list=ls())
@@ -33,19 +34,18 @@ data_dropped_na <-  na.omit(data)
 
 
 
-# Median imputation for 'age'
-median_age <- median(data$age, na.rm = TRUE)
-data$age[is.na(data$age)] <- median_age
-
-# Mode function for factors
-get_mode <- function(x) {
-  ux <- unique(x[!is.na(x)])
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
-# Mode imputation for 'q1002'
-mode_q1002 <- get_mode(data$q1002)
-data$q1002[is.na(data$q1002)] <- mode_q1002
+mice_init <- mice(data %>% select(age, q1002),
+                  m = 5, # creates 5 different imputed datasets (i.e., 5 multiple imputations).
+                  method = c(age = "pmm", q1002 = "polyreg"), #Uses Predictive Mean Matching to impute age (numeric) /Uses polytomous logistic regression to impute
+                  seed = 123,
+                  parallel = "multicore",
+                  ncore = parallel::detectCores()-1)
+# Extract one complete dataset (first imputed dataset of the 5 generated).
+data_imp <- complete(mice_init, action = 1)
+# Replace into original
+data <- data %>%
+  select(-age, -q1002) %>%
+  bind_cols(data_imp)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
