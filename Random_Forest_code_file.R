@@ -51,17 +51,17 @@ data$q1002[is.na(data$q1002)] <- mode_q1002
 
 # Overall Summary
 summary(data)
-## NOTE: Main issue is that variables have very unintuitive names. Main objective of this step: Rename variables and check for major class imbalance.
-# 
-# # Current names of variables
-# names(data)
-# 
-# #Import rename-frame 
-# var_rename <- read_csv("var_rename.csv")
-# 
-# # Make new_label the new column names in data
-# data <- data %>%
-#   rename_with(~ var_rename$new_label[match(., var_rename$original_label)], everything())
+# NOTE: Main issue is that variables have very unintuitive names. Main objective of this step: Rename variables and check for major class imbalance.
+
+# Current names of variables
+names(data)
+
+#Import rename-frame
+var_rename <- read_csv("var_rename.csv")
+
+# Make new_label the new column names in data
+data <- data %>%
+  rename_with(~ var_rename$new_label[match(., var_rename$original_label)], everything())
 
 # NOTE: Renaming code works. However, the recoding file "var_rename.csv" is not entirely correct because it was created by AI. If worth the effort, maybe re-check. Otherwise proceed without renaming variables
   
