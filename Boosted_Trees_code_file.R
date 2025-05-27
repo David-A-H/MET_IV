@@ -138,13 +138,6 @@ registerDoFuture()
 set.seed(123)
 folds <- vfold_cv(train, v = 10)
 
-rec <- recipe(emig ~ ., data = train) %>%
-  step_novel(all_nominal_predictors(), new_level = "__new__") %>%
-  step_dummy(all_nominal_predictors()) %>%
-  step_normalize(all_numeric_predictors()) %>%
-  step_nzv(all_predictors()) 
-
-
 knn_rec <- recipe(emig ~ ., data = train) %>%
   step_novel(all_nominal_predictors(), new_level = "__new__") %>%
   step_impute_knn(all_predictors(), neighbors = 5) %>%
@@ -162,13 +155,6 @@ knn_rec <- recipe(emig ~ ., data = train) %>%
   step_zv() %>% 
   step_smote(all_outcomes(), over_ratio = 1) %>%
   step_normalize(all_numeric_predictors())
-
-
-?step_impute_knn()
-# prep/apply to the train set
-knn_prep  <- prep(knn_rec, training = train)
-train_imp <- bake(knn_prep,   new_data = train)
-test_imp  <- bake(knn_prep,   new_data = test)
 
 
 xgb_model <- boost_tree(
@@ -214,9 +200,6 @@ xgb_wf2 <- workflow() %>%
   add_recipe(knn_rec) %>%
   add_model(xgb_model2)
 
-xgb_wf2 <- workflow() %>%
-  add_model(xgb_model2) %>% 
-  add_formula(emig ~ .)
 
 
 xgb_tuned <- xgb_wf %>%
