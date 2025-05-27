@@ -192,6 +192,43 @@ roc_auc(data = test_preds,
         truth = emig,
         .pred_Yes)
 
+
+
+
+
+# Current Performance
+# Truth
+# Prediction Yes  No
+# Yes  50  39
+# No  285 969
+# > 
+#   > 
+#   > # Ensure variables are factors with correct levels
+#   > test_preds <- test_preds %>%
+#   +   mutate(emig = as.factor(emig),
+#              +          .pred_class_custom = factor(.pred_class_custom, levels = levels(emig)))
+# > 
+#   > # Apply metrics
+#   > my_metrics(data = test_preds,
+#                +                truth = emig,
+#                +                estimate = .pred_class_custom)
+# # A tibble: 4 × 3
+# .metric   .estimator .estimate
+# <chr>     <chr>          <dbl>
+#   1 accuracy  binary         0.759
+# 2 precision binary         0.562
+# 3 recall    binary         0.149
+# 4 f_meas    binary         0.236
+# > 
+#   > # ROC AUC requires class probabilities
+#   > roc_auc(data = test_preds,
+#             +         truth = emig,
+#             +         .pred_Yes)
+# # A tibble: 1 × 3
+# .metric .estimator .estimate
+# <chr>   <chr>          <dbl>
+#   1 roc_auc binary         0.704
+
 ########
 # 
 # 
