@@ -94,6 +94,29 @@ prop.table(table(test$emig))
 backup <-  data
 backup_dropped_na <- data_dropped_na
 
+
+
+
+# 1 Class duplicating (because reweighing didn't work)
+## show current imbalance
+table(train$emig) # 0 = 0.85, 1 = 0.15. Aim is to upsample 3368 1 observations
+
+### Set seed again
+set.seed(123)
+
+## Upsample the minority class (1) to match the majority class (0)
+train <- train %>%
+  group_by(emig) %>%
+  slice_sample(n = max(table(train$emig)), replace = TRUE) %>%
+  ungroup()
+
+## Check the new class distribution
+table(train$emig) # 0 = 0.5, 1 = 0.5. Now balanced
+table(test$emig)
+
+
+
+
 # # Load evaluation data (Used for evaluating the model at the very end)
 # eval <- load("final_project/AB4x_eval_mock.Rdata")
 
@@ -191,105 +214,6 @@ my_metrics(data = test_preds,
 roc_auc(data = test_preds,
         truth = emig,
         .pred_Yes)
-
-
-
-
-
-# Current Performance
-# Truth
-# Prediction Yes  No
-# Yes  50  39
-# No  285 969
-# > 
-#   > 
-#   > # Ensure variables are factors with correct levels
-#   > test_preds <- test_preds %>%
-#   +   mutate(emig = as.factor(emig),
-#              +          .pred_class_custom = factor(.pred_class_custom, levels = levels(emig)))
-# > 
-#   > # Apply metrics
-#   > my_metrics(data = test_preds,
-#                +                truth = emig,
-#                +                estimate = .pred_class_custom)
-# # A tibble: 4 × 3
-# .metric   .estimator .estimate
-# <chr>     <chr>          <dbl>
-#   1 accuracy  binary         0.759
-# 2 precision binary         0.562
-# 3 recall    binary         0.149
-# 4 f_meas    binary         0.236
-# > 
-#   > # ROC AUC requires class probabilities
-#   > roc_auc(data = test_preds,
-#             +         truth = emig,
-#             +         .pred_Yes)
-# # A tibble: 1 × 3
-# .metric .estimator .estimate
-# <chr>   <chr>          <dbl>
-#   1 roc_auc binary         0.704
-
-########
-# 
-# 
-# collect_metrics(res_rbf)
-# 
-# # collect confusion matrix from res_rbf
-# confusion_rbf <- collect_predictions(res_rbf) %>%
-#   conf_mat(truth = emig, estimate = .pred_class)
-# # Display confusion matrix
-# confusion_rbf
-# 
-# 
-# 
-# 
-# ##############
-# 
-# #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# # Calculate and display ROC curve and AUC value
-# 
-# # Get ROC data for each model
-# get_roc_data <- function(results, model_name) {
-#   collect_predictions(results, summarize = FALSE) %>%
-#     roc_curve(truth = emig, .pred_1) %>%  # assuming "1" is the positive class
-#     mutate(Model = model_name)
-# }
-# 
-# roc_linear <- get_roc_data(res_linear, "Linear")
-# roc_poly <- get_roc_data(res_poly, "Polynomial")
-# roc_rbf <- get_roc_data(res_rbf, "RBF")
-# 
-# # Combine and plot
-# roc_data <- bind_rows(roc_linear, roc_poly, roc_rbf)
-# 
-# ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity, color = Model)) +
-#   geom_path(size = 1.2) +
-#   geom_abline(lty = 2, color = "gray") +
-#   coord_equal() +
-#   labs(title = "ROC Curve", x = "1 - Specificity", y = "Sensitivity")
-# 
-# 
-# #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# 
-# 
-# # Calculate AUC for each model
-# get_auc <- function(results) {
-#   collect_predictions(results, summarize = FALSE) %>%
-#     roc_auc(truth = emig, .pred_1)
-# }
-# 
-# auc_linear <- get_auc(res_linear)
-# auc_poly <- get_auc(res_poly)
-# auc_rbf <- get_auc(res_rbf)
-# 
-# bind_rows(
-#   Linear = auc_linear,
-#   Polynomial = auc_poly,
-#   RBF = auc_rbf,
-#   .id = "Model"
-# )
-
-
 
 
 
