@@ -11,6 +11,8 @@ library(tidymodels)
 library(caret)
 library(cluster)
 library(glmnet)
+library(mice)
+library(pROC)
 
 # Clear Global Environment
 rm(list=ls())
@@ -33,20 +35,19 @@ data_dropped_na <-  na.omit(data)
 
 
 
-
-# Median imputation for 'age'
-median_age <- median(data$age, na.rm = TRUE)
-data$age[is.na(data$age)] <- median_age
-
-# Mode function for factors
-get_mode <- function(x) {
-  ux <- unique(x[!is.na(x)])
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
-# Mode imputation for 'q1002'
-mode_q1002 <- get_mode(data$q1002)
-data$q1002[is.na(data$q1002)] <- mode_q1002
+# NA Imputation
+mice_init <- mice(data %>% select(age, q1002),
+                  m = 5, # creates 5 different imputed datasets (i.e., 5 multiple imputations).
+                  method = c(age = "pmm", q1002 = "polyreg"), #Uses Predictive Mean Matching to impute age (numeric) /Uses polytomous logistic regression to impute
+                  seed = 123,
+                  parallel = "multicore",
+                  ncore = parallel::detectCores()-1)
+# Extract one complete dataset (first imputed dataset of the 5 generated).
+data_imp <- complete(mice_init, action = 1)
+# Replace into original
+data <- data %>%
+  select(-age, -q1002) %>%
+  bind_cols(data_imp)
 
 
 # Convert emig to factor
@@ -95,11 +96,28 @@ test <- data[-train_index, ]
 prop.table(table(train$emig))
 prop.table(table(test$emig))
 
-
-
 # Create backup data file
 backup <-  data
 backup_dropped_na <- data_dropped_na
+
+# 
+# # 1 Class duplicating (because reweighing didn't work)
+# ## show current imbalance
+# table(train$emig) # 0 = 0.85, 1 = 0.15. Aim is to upsample 3368 1 observations
+# 
+# ### Set seed again
+# set.seed(123)
+# 
+# ## Upsample the minority class (1) to match the majority class (0)
+# train <- train %>%
+#   group_by(emig) %>%
+#   slice_sample(n = max(table(train$emig)), replace = TRUE) %>%
+#   ungroup()
+# 
+# ## Check the new class distribution
+# table(train$emig) # 0 = 0.5, 1 = 0.5. Now balanced
+# table(test$emig)
+
 
 # # Load evaluation data (Used for evaluating the model at the very end)
 # eval <- load("final_project/AB4x_eval_mock.Rdata")
@@ -110,15 +128,8 @@ rm(list=ls()[!ls() %in% c("train", "test", "backup", "backup_dropped_na", "eval"
 
 ### COMMENCE PREDICTION #####################################################################################
 # Logistic Regression on all features as a baseline
-
-
-
-
-
-
-
-
 set.seed(123)
+
 
 # Define a recipe to handle preprocessing
 logistic_recipe <- recipe(emig ~ ., data = train) %>%
@@ -141,6 +152,7 @@ logistic_wf <- workflow() %>%
 # Fit the model to training data
 logistic_fit <- logistic_wf %>%
   fit(data = train)
+# NOTE: The case_weights argument is used to apply the weights calculated earlier
 
 # Generate predictions on the test set
 logistic_pred      <- predict(logistic_fit, new_data = test, type = "class")
@@ -153,28 +165,6 @@ logistic_result <- confusionMatrix(
   positive = "1"
 )
 print(logistic_result)
-
-# Combine predictions with actuals for ROC analysis
-logistic_results <- bind_cols(test, logistic_pred_prob) %>%
-  mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure positive class is first
-
-# ROC and AUC
-roc_data <- roc_curve(logistic_results, truth = emig, .pred_1)
-auc_value <- roc_auc(logistic_results, truth = emig, .pred_1)
-print(auc_value)
-
-# ROC Curve
-ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity)) +
-  geom_line(color = "blue", size = 1.2) +
-  geom_abline(linetype = "dashed", color = "gray") +
-  labs(
-    title = "ROC Curve - Logistic Regression",
-    x = "1 - Specificity (False Positive Rate)",
-    y = "Sensitivity (True Positive Rate)"
-  ) +
-  theme_minimal()
-
-
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # LASSO REGRESSION
@@ -238,27 +228,6 @@ lasso_result <- confusionMatrix(
   positive = "1"
 )
 print(lasso_result)
-
-# Prepare data for ROC
-lasso_results <- bind_cols(test, lasso_pred_prob) %>%
-  mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure correct order
-
-# ROC and AUC
-lasso_roc_data <- roc_curve(lasso_results, truth = emig, .pred_1)
-lasso_auc_value <- roc_auc(lasso_results, truth = emig, .pred_1)
-print(lasso_auc_value)
-
-# Plot ROC Curve
-ggplot(lasso_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
-  geom_line(color = "blue", size = 1.2) +
-  geom_abline(linetype = "dashed", color = "gray") +
-  labs(
-    title = "ROC Curve - Lasso Logistic Regression",
-    x = "1 - Specificity (False Positive Rate)",
-    y = "Sensitivity (True Positive Rate)"
-  ) +
-  theme_minimal()
-
 
 
 
@@ -325,45 +294,75 @@ ridge_result <- confusionMatrix(
 )
 print(ridge_result)
 
-# Prepare data for ROC
-ridge_results <- bind_cols(test, ridge_pred_prob) %>%
-  mutate(emig = factor(emig, levels = c("1", "0")))  # Ensure correct order
-
-# ROC and AUC
-ridge_roc_data <- roc_curve(ridge_results, truth = emig, .pred_1)
-ridge_auc_value <- roc_auc(ridge_results, truth = emig, .pred_1)
-print(ridge_auc_value)
-
-# Plot ROC Curve
-ggplot(ridge_roc_data, aes(x = 1 - specificity, y = sensitivity)) +
-  geom_line(color = "blue", size = 1.2) +
-  geom_abline(linetype = "dashed", color = "gray") +
-  labs(
-    title = "ROC Curve - ridge Logistic Regression",
-    x = "1 - Specificity (False Positive Rate)",
-    y = "Sensitivity (True Positive Rate)"
-  ) +
-  theme_minimal()
-
-
-
-
 
 
 ### COMMENCE MODEL COMPARISON AND EXTRACTION #################################################################
 
 
-# Compare models based on AUC
-model_comparison <- tibble(
+# Calculate AUC for each model
+
+# Logistic Regression AUC
+logistic_roc <- roc(test$emig, as.numeric(logistic_pred_prob$.pred_1))
+logistic_auc <- auc(logistic_roc)
+
+# Lasso Regression AUC
+lasso_roc <- roc(test$emig, as.numeric(lasso_pred_prob$.pred_1))
+lasso_auc <- auc(lasso_roc)
+
+# Ridge Regression AUC
+ridge_roc <- roc(test$emig, as.numeric(ridge_pred_prob$.pred_1))
+ridge_auc <- auc(ridge_roc)
+
+
+
+
+# Based on logistic_result, calculate accuracy, precision, recall and F1
+logistic_accuracy <- logistic_result$overall["Accuracy"]
+logistic_precision <- logistic_result$byClass["Precision"]
+logistic_recall <- logistic_result$byClass["Recall"]
+logistic_f1 <- logistic_result$byClass["F1"]
+
+# Based on lasso_result, calculate accuracy, precision, recall and F1
+lasso_accuracy <- lasso_result$overall["Accuracy"]
+lasso_precision <- lasso_result$byClass["Precision"]
+lasso_recall <- lasso_result$byClass["Recall"]
+lasso_f1 <- lasso_result$byClass["F1"]
+
+# Based on ridge_result, calculate accuracy, precision, recall and F1
+ridge_accuracy <- ridge_result$overall["Accuracy"]
+ridge_precision <- ridge_result$byClass["Precision"]
+ridge_recall <- ridge_result$byClass["Recall"]
+ridge_f1 <- ridge_result$byClass["F1"]
+
+
+# Summarise all performance metrics in a table
+performance_metrics <- tibble(
   Model = c("Logistic Regression", "Lasso Regression", "Ridge Regression"),
-  AUC = c(auc_value$.estimate, lasso_auc_value$.estimate, ridge_auc_value$.estimate)
+  Accuracy = c(logistic_accuracy, lasso_accuracy, ridge_accuracy),
+  Precision = c(logistic_precision, lasso_precision, ridge_precision),
+  Recall = c(logistic_recall, lasso_recall, ridge_recall),
+  F1_Score = c(logistic_f1, lasso_f1, ridge_f1)
 )
-print(model_comparison)
+performance_metrics
+
+logistic_auc
+lasso_auc
+ridge_auc
 
 
 
-# Results of this
-# Model                 AUC
-# 1 Logistic Regression 0.677
-# 2 Lasso Regression    0.727
-# 3 Ridge Regression    0.715
+
+# 
+# > performance_metrics
+# # A tibble: 3 × 5
+# Model               Accuracy Precision Recall F1_Score
+# <chr>                  <dbl>     <dbl>  <dbl>    <dbl>
+# 1 Logistic Regression    0.636     0.358  0.582    0.444
+# 2 Lasso Regression       0.506     0.309  0.794    0.445
+# 3 Ridge Regression       0.500     0.308  0.806    0.446
+# > logistic_auc
+# Area under the curve: 0.6558
+# > lasso_auc
+# Area under the curve: 0.6719
+# > ridge_auc
+# Area under the curve: 0.674

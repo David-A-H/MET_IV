@@ -33,7 +33,7 @@ na_count[na_count > 0]
 data_dropped_na <-  na.omit(data)
 
 
-
+# NA imputation
 mice_init <- mice(data %>% select(age, q1002),
                   m = 5, # creates 5 different imputed datasets (i.e., 5 multiple imputations).
                   method = c(age = "pmm", q1002 = "polyreg"), #Uses Predictive Mean Matching to impute age (numeric) /Uses polytomous logistic regression to impute
