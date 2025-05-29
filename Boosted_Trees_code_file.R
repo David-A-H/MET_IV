@@ -78,17 +78,17 @@ init <- mice(train, maxit = 0, printFlag = FALSE)
 typeof(data)
 # Overall Summary
 summary(data)
-# NOTE: Main issue is that variables have very unintuitive names. Main objective of this step: Rename variables and check for major class imbalance.
-
-# Current names of variables
-names(data)
-
-#Import rename-frame
-var_rename <- read_csv("var_rename.csv")
-
-# Make new_label the new column names in data
-data <- data %>%
-  rename_with(~ var_rename$new_label[match(., var_rename$original_label)], everything())
+## NOTE: Main issue is that variables have very unintuitive names. Main objective of this step: Rename variables and check for major class imbalance.
+# 
+# # Current names of variables
+# names(data)
+# 
+# #Import rename-frame 
+# var_rename <- read_csv("var_rename.csv")
+# 
+# # Make new_label the new column names in data
+# data <- data %>%
+#   rename_with(~ var_rename$new_label[match(., var_rename$original_label)], everything())
 
 # NOTE: Renaming code works. However, the recoding file "var_rename.csv" is not entirely correct because it was created by AI. If worth the effort, maybe re-check. Otherwise proceed without renaming variables
   
@@ -150,16 +150,9 @@ rec <- recipe(emig ~ ., data = train) %>%
   # It balances the classes by duplicating instances from the minority class to match the size of the majority class.
   # The ratio of the minority class to the majority class is set to 1, 
   #meaning the minority class will be upsampled until it has the same number of instances as the majority class.
- step_upsample(emig, over_ratio = 1) %>% 
-  step_downsample(emig, under_ratio = 1) %>%
+  step_smote(emig) %>% 
   step_normalize(all_numeric_predictors())
 
-
-xgb_spec <- expand_grid(
-  trees = c(200, 500, 800),
-  tree_depth = c(2, 3, 4),
-  learn_rate = c(0.005, 0.01, 0.015)
-)
 
 xgb_spec <- boost_tree(
   trees = tune(),
@@ -215,6 +208,14 @@ xgb_grid<- expand_grid(
   learn_rate = c(0.005, 0.01, 0.015)
 )
 
+
+xgb_grid2<- grid_space_filling(
+  trees(range = c(200, 1200)),  # 'mtry' between 5 and 30
+  tree_depth(range = c(3, 8)),  # 'trees' between 500 and 1500
+  learn_rate(range = c(0.005, 0.015)),  # 'min_n' between 2 and 10
+  size = 50)  
+
+
 xgb_grid <- grid_latin_hypercube(
   trees(), tree_depth(), learn_rate(), mtry(range = c(5, 20)),
   min_n(), loss_reduction(), sample_prop, scale_pos_weight(range = c(1, 4)),
@@ -242,7 +243,23 @@ tune_res <- tune_grid(
   )
 )
 
+set.seed(123)
+plan(multisession, workers = parallel::detectCores() - 1)
+registerDoFuture()
+tune_res2 <- tune_grid(
+  wf,
+  resamples = folds,
+  grid = xgb_grid2,
+  metrics = metric_set(roc_auc, pr_auc, accuracy, f_meas),
+  control   = control_grid(
+    verbose      = FALSE,
+    save_pred    = TRUE
+    # with future, parallelism is automatic under the hood
+  )
+)
+
 plan(sequential)
+
 
 
 tune_res %>% 
@@ -279,7 +296,6 @@ th_equal <- roc_data %>%
   slice_min(diff, n = 1) %>%
   pull(.threshold)
 
-
 #–– 11. Evaluate on your held-out future test set
 preds_x <- predict(final_fit, test, type = "prob") %>%
   bind_cols(predict(final_fit, test)) %>%
@@ -299,13 +315,15 @@ preds_xg <- preds_x %>%
     .pred_class = factor(.pred_class, levels = c("No", "Yes"))  # estimate
   )
 
-preds_xg  <- preds_x %>%
+preds_xl  <- preds_x %>%
   mutate(
     emig = factor(emig, levels = c("No", "Yes")),  
-    .pred_class = if_else(.pred_Yes >= th_equal, "Yes", "No"),# truth
+    .pred_class = if_else(.pred_Yes >= th_equal , "Yes", "No"),# truth
     .pred_class = factor(.pred_class, levels = c("No", "Yes")),
     # estimate
   )
+
+custom <- 0.5
 
 preds_xg$emig <- factor(preds_xg$emig)
 preds2$emig <- factor(preds2$emig)
@@ -314,28 +332,33 @@ preds2$.pred_class <- factor(preds2$.pred_class)
 cm <- conf_mat(preds_xg, truth = emig, estimate = .pred_class, 
                mode = "everything") 
 
-cm2 <- conf_mat(preds_xg, truth = emig, estimate = .pred_class, 
+cm2 <- conf_mat(preds_xl, truth = emig, estimate = .pred_class, 
                mode = "everything") 
 
 cm3 <- conf_mat(preds2x, truth = emig, estimate = .pred_class, 
                 mode = "everything") 
-
+cm
 cm2
-cm3
+
 
 # Compute metrics
-roc_auc(preds_xg, truth = emig, .pred_class, event_level = "second")
+
+roc_auc(preds_xg,
+        truth       = emig,
+        .pred_Yes,               # <-- numeric probability
+        event_level = "second")  # ensures “Yes” is the second/focused level
+
 accuracy(preds_xg, truth = emig, .pred_class)
 yardstick::precision(preds_xg, truth = emig, estimate = .pred_class, event_level = "second")
 yardstick::recall(preds_xg, truth = emig, .pred_class, event_level = "second")
 f_meas(preds_xg, truth = emig, .pred_class, event_level = "second")
 
 
-roc_auc(preds2x, truth = emig, .pred_class, event_level = "second")
-accuracy(preds2x, truth = emig, .pred_class)
-yardstick::precision(preds2x, truth = emig, estimate = .pred_class, event_level = "second")
-yardstick::recall(preds2x, truth = emig, .pred_class, event_level = "second")
-f_meas(preds2x, truth = emig, .pred_class, event_level = "second")
+roc_auc(preds_xl, truth = emig, .pred_class, event_level = "second")
+accuracy(preds_xl, truth = emig, .pred_class)
+yardstick::precision(preds_xl, truth = emig, estimate = .pred_class, event_level = "second")
+yardstick::recall(preds_xl, truth = emig, .pred_class, event_level = "second")
+f_meas(preds_xl, truth = emig, .pred_class, event_level = "second")
 
 ?recall()
 
