@@ -137,7 +137,7 @@ logistic_recipe <- recipe(emig ~ ., data = train) %>%
   step_nzv(all_predictors()) %>%                      # Remove near-zero variance predictors
   step_unknown(all_nominal_predictors()) %>%          # Handle unseen levels in test data
   step_other(all_nominal_predictors(), threshold = 0.01) %>%  # Combine infrequent levels
-  step_dummy(all_nominal_predictors())                # Convert factors to dummies
+  step_dummy(all_nominal_predictors())               # Convert factors to dummies
 
 # Define the logistic regression model
 logistic_model <- logistic_reg() %>%
@@ -176,7 +176,8 @@ lasso_recipe <- recipe(emig ~ ., data = train) %>%
   step_nzv(all_predictors()) %>%
   step_unknown(all_nominal_predictors()) %>%
   step_other(all_nominal_predictors(), threshold = 0.01) %>%
-  step_dummy(all_nominal_predictors())
+  step_dummy(all_nominal_predictors())  %>% 
+  step_normalize(all_numeric_predictors()) 
 
 # Define Lasso model (glmnet with alpha = 1)
 lasso_model <- logistic_reg(
@@ -241,7 +242,8 @@ ridge_recipe <- recipe(emig ~ ., data = train) %>%
   step_nzv(all_predictors()) %>%
   step_unknown(all_nominal_predictors()) %>%
   step_other(all_nominal_predictors(), threshold = 0.01) %>%
-  step_dummy(all_nominal_predictors())
+  step_dummy(all_nominal_predictors()) %>% 
+  step_normalize(all_numeric_predictors()) 
 
 # Define ridge model (glmnet with alpha = 1)
 ridge_model <- logistic_reg(
